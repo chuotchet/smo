@@ -15,5 +15,8 @@ var models = require('../models');
 router.get('/', function(req, res, next) {
   res.render('index', { title: 'Express' });
 });
+router.get('/hihi', function(req, res, next) {
+  res.send('hihi');
+});
 
 module.exports = router;
