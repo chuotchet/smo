@@ -13,13 +13,20 @@ router.post('/register', function(req, res){
     username: req.body.username,
     password: req.body.password
   };
+  var datasend = {
+    success: '',
+    msg: ''
+  };
   models.User.getUserByUsename(newUser.username, function(user){
     if(user){
-      res.send('Username has already exist');
+      datasend.success = 'No';
+      datasend.msg = 'Username has already exist';
+      res.send(datasend);
     }
     else{
       models.User.createUser(newUser);
-      res.send('OK');
+      datasend.success = 'Yes';
+      res.send(datasend);
     }
   });
 });
@@ -37,7 +44,6 @@ router.post('/token',function(req,res){
 });
 
 router.post('/login',function(req, res){
-  console.log(req.body);
   models.User.findOne({
     where: {
       username: req.body.username
@@ -51,13 +57,19 @@ router.post('/login',function(req, res){
         }
         var token = jwt.sign(usr,'conChuot',{expiresIn:30000});
         res.json({
-          mes: 'ok',
+          success: 'Yes',
           token: token
         });
       }
-      else res.send('not ok');
+      else res.json({
+        success: 'No',
+        msg: 'Wrong password'
+      });
     }
-    else res.send('no user');
+    else res.json({
+      success: 'No',
+      msg: 'Username invalid'
+    });
   });
 });
 
