@@ -13,7 +13,7 @@ var models = require('../models');
 // });
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Express' });
+  res.render('index', { title: 'Smart office' });
 });
 router.get('/hihi', function(req, res, next) {
   res.send('hihi');
