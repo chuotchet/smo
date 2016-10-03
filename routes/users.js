@@ -50,24 +50,26 @@ router.post('/login',function(req, res){
     }
   }).then(function(user){
     if (user){
-      if (user.password==req.body.password){
-        var usr = {
-          username: user.username,
-          password: user.password
+      models.User.comparePassword(req.body.password, user.password, function(isMatch){
+        if (isMatch){
+          var usr = {
+            username: user.username,
+            password: user.password
+          }
+          var token = jwt.sign(usr,'conChuot',{expiresIn:30000});
+          res.json({
+            success: true,
+            token: token
+          });
         }
-        var token = jwt.sign(usr,'conChuot',{expiresIn:30000});
-        res.json({
-          success: 'Yes',
-          token: token
+        else res.json({
+          success: false,
+          msg: 'Wrong password'
         });
-      }
-      else res.json({
-        success: 'No',
-        msg: 'Wrong password'
       });
     }
     else res.json({
-      success: 'No',
+      success: false,
       msg: 'Username invalid'
     });
   });

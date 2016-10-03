@@ -32,7 +32,7 @@ module.exports = function(sequelize, DataTypes) {
       comparePassword: function(password, hashed, callback){
         bcrypt.compare(password, hashed, function(err, isMatch){
           if(err) throw err;
-          callback(null, isMatch);
+          callback(isMatch);
         });
       }
       // associate: function(models){
