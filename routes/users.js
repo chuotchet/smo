@@ -13,20 +13,19 @@ router.post('/register', function(req, res){
     username: req.body.username,
     password: req.body.password
   };
-  var datasend = {
-    success: '',
-    msg: ''
-  };
   models.User.getUserByUsename(newUser.username, function(user){
     if(user){
-      datasend.success = 'No';
-      datasend.msg = 'Username has already exist';
-      res.send(datasend);
+      res.json({
+        success: false,
+        message: 'Username has already exist';
+      });
     }
     else{
       models.User.createUser(newUser);
-      datasend.success = 'Yes';
-      res.send(datasend);
+      res.json({
+        success: true,
+        message: 'Register success!'
+      });
     }
   });
 });
@@ -52,13 +51,17 @@ router.post('/login',function(req, res){
     if (user){
       models.User.comparePassword(req.body.password, user.password, function(isMatch){
         if (isMatch){
-          var usr = {
-            username: user.username,
-            password: user.password
-          }
-          var token = jwt.sign(usr,'conChuot',{expiresIn:30000});
+          // var usr = {
+          //   username: user.username,
+          //   password: user.password
+          // }
+          var token = jwt.sign(user.username,'conChuot',{expiresIn:30000});
           res.json({
             success: true,
+            message: 'Login success!',
+            results: {
+              username: user.username
+            }
             token: token
           });
         }
