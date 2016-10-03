@@ -67,13 +67,13 @@ router.post('/login',function(req, res){
         }
         else res.json({
           success: false,
-          msg: 'Wrong password'
+          message: 'Wrong password'
         });
       });
     }
     else res.json({
       success: false,
-      msg: 'Username invalid'
+      message: 'Username invalid'
     });
   });
 });
