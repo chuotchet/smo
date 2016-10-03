@@ -17,7 +17,7 @@ router.post('/register', function(req, res){
     if(user){
       res.json({
         success: false,
-        message: 'Username has already exist';
+        message: 'Username has already exist'
       });
     }
     else{
