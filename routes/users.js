@@ -61,7 +61,7 @@ router.post('/login',function(req, res){
             message: 'Login success!',
             results: {
               username: user.username
-            }
+            },
             token: token
           });
         }
