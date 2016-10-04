@@ -7,11 +7,15 @@ var jwt = require('jsonwebtoken');
 router.get('/', function(req, res, next) {
   res.send('respond with a resource');
 });
+models.User.sync({
+  force: true
+});
 
 router.post('/register', function(req, res){
   var newUser = {
     username: req.body.username,
-    password: req.body.password
+    password: req.body.password,
+    email: req.body.email
   };
   models.User.getUserByUsename(newUser.username, function(user){
     if(user){
@@ -58,7 +62,8 @@ router.post('/login',function(req, res){
       models.User.comparePassword(req.body.password, user.password, function(isMatch){
         if (isMatch){
           var usr = {
-            username: user.username
+            username: user.username,
+            email: user.email
           }
           var token = jwt.sign(usr,'conChuot',{expiresIn:30000});
           res.json({
