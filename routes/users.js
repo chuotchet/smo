@@ -17,14 +17,20 @@ router.post('/register', function(req, res){
     if(user){
       res.json({
         success: false,
-        message: 'Username has already exist'
+        data: {
+          message: 'Register failed!'
+        },
+        error: 'Username has already exist'
       });
     }
     else{
       models.User.createUser(newUser);
       res.json({
         success: true,
-        message: 'Register success!'
+        data: {
+          message: 'Register success!',
+          username: newUser.username
+        }
       });
     }
   });
@@ -51,15 +57,14 @@ router.post('/login',function(req, res){
     if (user){
       models.User.comparePassword(req.body.password, user.password, function(isMatch){
         if (isMatch){
-          // var usr = {
-          //   username: user.username,
-          //   password: user.password
-          // }
-          var token = jwt.sign(user.username,'conChuot',{expiresIn:30000});
+          var usr = {
+            username: user.username
+          }
+          var token = jwt.sign(usr,'conChuot',{expiresIn:30000});
           res.json({
             success: true,
-            message: 'Login success!',
-            results: {
+            data: {
+              message: 'Login success!',
               username: user.username
             },
             token: token
@@ -67,13 +72,19 @@ router.post('/login',function(req, res){
         }
         else res.json({
           success: false,
-          message: 'Wrong password'
+          data: {
+            message: 'Login failed!'
+          },
+          error: 'Wrong password'
         });
       });
     }
     else res.json({
       success: false,
-      message: 'Username invalid'
+      data: {
+        message: 'Login failed!'
+      },
+      error: 'Username invalid'
     });
   });
 });
