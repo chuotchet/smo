@@ -7,9 +7,6 @@ var jwt = require('jsonwebtoken');
 router.get('/', function(req, res, next) {
   res.send('respond with a resource');
 });
-models.User.sync({
-  force: true
-});
 
 router.post('/register', function(req, res){
   var newUser = {
