@@ -38,10 +38,10 @@ module.exports = function(sequelize, DataTypes) {
           if(err) throw err;
           callback(isMatch);
         });
+      },
+      associate: function(models){
+        User.belongsToMany(models.Gateway, {through: 'UserGateways'});
       }
-      // associate: function(models){
-      //   User.belongsToMany(models.Course, {through: models.Feedback});
-      // }
     },
     tableName: 'user'
   });

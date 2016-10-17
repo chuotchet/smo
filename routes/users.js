@@ -1,8 +1,24 @@
 var express = require('express');
 var router = express.Router();
 var passport = require('passport');
+var passportJWT = require('passport-jwt');
+var ExtractJwt = passportJWT.ExtractJwt;
+var Strategy = passportJWT.Strategy;
 var models = require('../models');
 var jwt = require('jsonwebtoken');
+var opts = {
+  secretOrKey: 'hihihehe',
+  jwtFromRequest: ExtractJwt.fromBodyField('token')
+}
+
+passport.use(new Strategy(opts, function(jwt_payload, done){
+  return done(null, jwt_payload);
+}));
+
+var authenticate = function(){
+  return passport.authenticate('jwt', {session: false});
+}
+
 /* GET users listing. */
 router.get('/', function(req, res, next) {
   res.send('respond with a resource');
@@ -37,16 +53,14 @@ router.post('/register', function(req, res){
   });
 });
 
-router.post('/token',function(req,res){
-  var token = req.body.token;
-  jwt.verify(token,'conChuot',function(err, decoded){
-    if(err){
-      res.send('failed');
-    }
-    else{
-      res.send(decoded);
-    }
+router.post('/token', authenticate(), function(req,res){
+  console.log(req.user.username);
+  models.User.getUserByUsename(req.user.username, function(user){
+    models.Gateway.getGatewayByMAC('dao', function(gw){
+      user.addGateway(gw);
+    });
   });
+  res.send('ok');
 });
 
 router.post('/login',function(req, res){
@@ -62,7 +76,7 @@ router.post('/login',function(req, res){
             username: user.username,
             email: user.email
           }
-          var token = jwt.sign(usr,'conChuot',{expiresIn:30000});
+          var token = jwt.sign(usr,'hihihehe',{expiresIn:30000});
           res.json({
             success: true,
             data: {
@@ -91,4 +105,13 @@ router.post('/login',function(req, res){
   });
 });
 
+router.post('/getgateways', authenticate(), function(req, res){
+  models.User.getUserByUsename(req.user.username, function(user){
+    console.log(user);
+    user.getGateways().then(function(gw){
+      console.log(gw);
+      res.send(gw);
+    });
+  });
+});
 module.exports = router;
