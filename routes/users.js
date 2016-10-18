@@ -54,9 +54,8 @@ router.post('/register', function(req, res){
 });
 
 router.post('/token', authenticate(), function(req,res){
-  console.log(req.user.username);
   models.User.getUserByUsename(req.user.username, function(user){
-    models.Gateway.getGatewayByMAC('dao', function(gw){
+    models.Gateway.getGatewayByMAC('qwerty', function(gw){
       user.addGateway(gw);
     });
   });
@@ -107,10 +106,81 @@ router.post('/login',function(req, res){
 
 router.post('/getgateways', authenticate(), function(req, res){
   models.User.getUserByUsename(req.user.username, function(user){
-    console.log(user);
     user.getGateways().then(function(gw){
-      console.log(gw);
-      res.send(gw);
+      res.json({
+        success: true,
+        data: gw,
+        error: ''
+      });
+    });
+  });
+});
+
+router.post('/addgateway', authenticate(), function(req, res){
+  models.Gateway.getGatewayByMAC(req.body.G_MAC, function(gw){
+    if (gw.key!=req.body.key){
+      res.send('Key is not correct!');
+    }
+    else {
+      gw.name = req.body.name;
+      gw.save().then(function(){
+        models.User.getUserByUsename(req.user.username, function(user){
+          user.addGateway(gw).then(function(){
+            user.getGateways().then(function(gtw){
+              res.json({
+                success: true,
+                data: gtw,
+                error: ''
+              });
+            });
+          });
+        });
+      });
+    }
+  });
+});
+
+router.post('/editgateway', authenticate(), function(req, res){
+  models.User.getUserByUsename(req.user.username, function(user){
+    models.Gateway.getGatewayByMAC(req.body.G_MAC, function(gw){
+      user.hasGateway(gw).then(function(isAsscociated){
+        if(!isAsscociated){
+          res.send('User does not have this gateway yet!');
+        }
+        else {
+          gw.name = req.body.name;
+          gw.save().then(function(){
+            user.getGateways().then(function(gtw){
+              res.json({
+                success: true,
+                data: gtw,
+                error: ''
+              });
+            });
+          });
+        }
+      });
+    });
+  });
+});
+
+router.post('/deletegateway', authenticate(), function(req, res){
+  models.User.getUserByUsename(req.user.username, function(user){
+    models.Gateway.getGatewayByMAC(req.body.G_MAC, function(gw){
+      if(gw.key!=req.body.key){
+        res.send('Key is not correct!');
+      }
+      else{
+        user.removeGateway(gw).then(function(){
+          user.getGateways().then(function(gtw){
+            res.json({
+              success: true,
+              data: gtw,
+              error: ''
+            });
+          });
+        });
+      }
     });
   });
 });

@@ -22,10 +22,10 @@ router.get('/hihi', function(req, res, next) {
 
 router.post('/gateway', function(req, res){
   var data = {
-    G_MAC: req.body.MAC,
+    G_MAC: req.body.G_MAC,
     key: req.body.key
   }
-  models.Gateway.getGatewayByMAC(req.body.MAC, function(gw){
+  models.Gateway.getGatewayByMAC(req.body.G_MAC, function(gw){
     if (!gw){
       models.Gateway.create(data);
       res.send('key added!');
