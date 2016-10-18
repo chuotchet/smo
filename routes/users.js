@@ -8,7 +8,7 @@ var models = require('../models');
 var jwt = require('jsonwebtoken');
 var opts = {
   secretOrKey: 'hihihehe',
-  jwtFromRequest: ExtractJwt.fromAuthHeader()
+  jwtFromRequest: ExtractJwt.fromHeader('token')
 }
 
 passport.use(new Strategy(opts, function(jwt_payload, done){
