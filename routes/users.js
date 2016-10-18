@@ -8,7 +8,7 @@ var models = require('../models');
 var jwt = require('jsonwebtoken');
 var opts = {
   secretOrKey: 'hihihehe',
-  jwtFromRequest: ExtractJwt.fromBodyField('token')
+  jwtFromRequest: ExtractJwt.fromAuthHeader()
 }
 
 passport.use(new Strategy(opts, function(jwt_payload, done){
@@ -109,7 +109,9 @@ router.post('/getgateways', authenticate(), function(req, res){
     user.getGateways().then(function(gw){
       res.json({
         success: true,
-        data: gw,
+        data: {
+          gateways: gw
+        },
         error: ''
       });
     });
@@ -129,7 +131,9 @@ router.post('/addgateway', authenticate(), function(req, res){
             user.getGateways().then(function(gtw){
               res.json({
                 success: true,
-                data: gtw,
+                data: {
+                  gateways: gtw
+                },
                 error: ''
               });
             });
@@ -153,7 +157,9 @@ router.post('/editgateway', authenticate(), function(req, res){
             user.getGateways().then(function(gtw){
               res.json({
                 success: true,
-                data: gtw,
+                data: {
+                  gateways: gtw
+                },
                 error: ''
               });
             });
@@ -175,7 +181,9 @@ router.post('/deletegateway', authenticate(), function(req, res){
           user.getGateways().then(function(gtw){
             res.json({
               success: true,
-              data: gtw,
+              data: {
+                gateways: gtw
+              },
               error: ''
             });
           });
