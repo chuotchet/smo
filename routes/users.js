@@ -173,7 +173,7 @@ router.post('/editgateway', authenticate(), function(req, res){
 router.post('/deletegateway', authenticate(), function(req, res){
   models.User.getUserByUsename(req.user.username, function(user){
     models.Gateway.getGatewayByMAC(req.body.G_MAC, function(gw){
-      if(gw.key!=req.body.key){
+      if(false){
         res.send('Key is not correct!');
       }
       else{
