@@ -44,4 +44,13 @@ router.post('/gateway', function(req, res){
   });
 });
 
+router.post('/node', function(req, res){
+  var data = {
+    N_MAC: req.body.MAC,
+    key: req.body.key
+  }
+  models.Node.create(data);
+  res.send('added node');
+});
+
 module.exports = router;

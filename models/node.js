@@ -1,12 +1,12 @@
 "use strict";
 
 module.exports = function(sequelize, DataTypes) {
-  var Gateway = sequelize.define('Gateway', {
+  var Node = sequelize.define('Node', {
     name: {
       type: DataTypes.STRING,
       allowNull: true
     },
-    G_MAC: {
+    N_MAC: {
       type: DataTypes.STRING,
       allowNull: false
     },
@@ -16,19 +16,19 @@ module.exports = function(sequelize, DataTypes) {
     }
   }, {
     classMethods: {
-      getGatewayByMAC: function(MAC, callback){
+      getNodeByMAC: function(MAC, callback){
         var query = {
           where: {
-            G_MAC: MAC
+            N_MAC: MAC
           }
         };
-        Gateway.findOne(query).then(callback);
+        Node.findOne(query).then(callback);
       },
       associate: function(models){
-        Gateway.belongsToMany(models.Node, {through: 'GatewayNodes'});
+        Node.belongsToMany(models.Device, {through: 'NodeDevices'});
       }
     },
-    tableName: 'gateway'
+    tableName: 'node'
   });
-  return Gateway;
+  return Node;
 };

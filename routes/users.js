@@ -173,23 +173,94 @@ router.post('/editgateway', authenticate(), function(req, res){
 router.post('/deletegateway', authenticate(), function(req, res){
   models.User.getUserByUsename(req.user.username, function(user){
     models.Gateway.getGatewayByMAC(req.body.G_MAC, function(gw){
-      if(false){
-        res.send('Key is not correct!');
-      }
-      else{
-        user.removeGateway(gw).then(function(){
-          user.getGateways().then(function(gtw){
-            res.json({
-              success: true,
-              data: {
-                gateways: gtw
-              },
-              error: ''
-            });
+      user.removeGateway(gw).then(function(){
+        user.getGateways().then(function(gtw){
+          res.json({
+            success: true,
+            data: {
+              gateways: gtw
+            },
+            error: ''
           });
         });
-      }
+      });
     });
   });
 });
+
+router.post('/getnodes', authenticate(), function(req, res){
+  models.Gateway.getGatewayByMAC(req.body.G_MAC, function(gw){
+    gw.getNodes().then(function(node){
+      res.json({
+        success: true,
+        data: {
+          nodes: node
+        }
+      });
+    });
+  });
+});
+
+router.post('/addnode', authenticate(), function(req, res){
+  models.Gateway.getGatewayByMAC(req.body.G_MAC, function(gw){
+    models.Node.getNodeByMAC(req.body.N_MAC, function(node){
+      node.name = req.body.name;
+      node.save().then(function(){
+        gw.addNode(node).then(function(){
+          gw.getNodes().then(function(nodes){
+            res.json({
+              success: true,
+              data: {
+                nodes: nodes
+              }
+            });
+          });
+        });
+      });
+    });
+  });
+});
+
+router.post('/editnode', authenticate(), function(req, res){
+  models.Gateway.getGatewayByMAC(req.body.G_MAC, function(gw){
+    models.Node.getNodeByMAC(req.body.N_MAC, function(node){
+      gw.hasNode(node).then(function(isAsscociated){
+        if(!isAsscociated){
+          res.send('Gateway does not have this node yet!');
+        }
+        else {
+          node.name = req.body.name;
+          node.save().then(function(){
+            gw.getNodes().then(function(nodes){
+              res.json({
+                success: true,
+                data: {
+                  nodes: nodes
+                }
+              });
+            });
+          });
+        }
+      });
+    });
+  });
+});
+
+router.post('/deletenode', authenticate(), function(req, res){
+  models.Gateway.getGatewayByMAC(req.body.G_MAC, function(gw){
+    models.Node.getNodeByMAC(req.body.N_MAC, function(node){
+      gw.removeNode(node).then(function(){
+        gw.getNodes().then(function(nodes){
+          res.json({
+            success: true,
+            data: {
+              nodes: nodes
+            }
+          });
+        });
+      });
+    });
+  });
+});
+
 module.exports = router;
