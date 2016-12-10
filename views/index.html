@@ -1,0 +1,416 @@
+<!DOCTYPE HTML>
+<html ng-app="myApp">
+	<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>Smart Office - Home</title>
+
+	</head>
+	<body>
+
+	<!-- Modal Profile-->
+  	<div class="modal fade" id="profileModal" role="dialog">
+    	<div class="modal-dialog">
+      		<div class="modal-content">
+        		<div class="modal-header">
+          			<button type="button" class="close" data-dismiss="modal" style="float: left;">&times;</button>
+          			<center>
+          				<img src="images/profile.png" style="width: 50%">
+          				<h2 class="modal-title" style="font-weight: bold;">keo hoang phuong</h2>
+          			</center>
+       			</div>
+       			 <div class="modal-body" style="height: 75px;">
+       			 	<!-- <img src="images/broker.png" style="float: left;"> -->
+       			 	<div class="input-group col-md-8 col-xs-6" style="float: left;">
+       			 		<span class="input-group-addon"><i class="fa fa-arrows fa" aria-hidden="true"></i></span>
+       			 		<input type="text" class="form-control" id="broker" style="text-align: center;" value="iot.eclipse.org">
+       			 	</div>
+       			 	<div class="col-md-4 col-xs-6" style="float: right;">
+       			 		<button class="btn btn-success" style="height: 46px;">Change broker</button>
+       			 	</div>
+
+       			 </div>
+        		<div class="modal-footer">
+        			<center>
+        				<button type="button" class="btn btn-success" data-dismiss="modal" style="float: left;">Change password</button>
+        				<button type="button" class="btn btn-danger" data-dismiss="modal" style="float: right;">Logout</button>
+        			</center>
+        		</div>
+      		</div>
+   		</div>
+  	</div>
+
+	<div class="gtco-loader"></div>
+
+	<div id="page">
+
+
+	<div class="page-inner">
+	<nav class="gtco-nav" role="navigation">
+		<div class="gtco-container">
+
+			<div class="row">
+				<div class="col-sm-4 col-xs-12">
+					<div id="gtco-logo"><a href="/">Smart Office</a></div>
+				</div>
+				<div class="col-xs-8 text-right menu-1">
+					<ul>
+						<li><a href="/tour">Guide</a></li>
+						<li><a href="/contact">Contact</a></li>
+						<li class="btn-cta"><a href="/gateways"><span>Get started</span></a></li>
+						<li id="user" ng-if="username"><a href="#profileModal" data-toggle="modal">{{userLogin}}</a></li>
+					</ul>
+				</div>
+			</div>
+
+		</div>
+	</nav>
+
+	<header id="gtco-header" class="gtco-cover" role="banner" style="background-image: url(images/3.jpg)">
+		<div class="overlay"></div>
+		<div class="gtco-container">
+			<div class="row">
+				<div class="col-md-12 col-md-offset-0 text-left">
+
+
+					<div class="row row-mt-15em">
+						<div class="col-md-7 mt-text animate-box" data-animate-effect="fadeInUp">
+							<span class="intro-text-small">Welcome to Smart Office</span>
+							<h1>Let Touch to Enjoy the Difference</h1>
+						</div>
+						<div class="col-md-4 col-md-push-1 animate-box" data-animate-effect="fadeInRight">
+							<div class="form-wrap">
+								<div class="tab">
+									<ul class="tab-menu">
+										<li class="active gtco-first"><a href="#" data-tab="signup">Sign up</a></li>
+										<li class="gtco-second"><a href="#" data-tab="login">Login</a></li>
+										<li><a href="#" data-tab="change">Change</a></li>
+										<li><a href="#" data-tab="reset">Forget</a></li>
+									</ul>
+									<div class="tab-content">
+										<!-- Register tab -->
+										<div class="tab-content-inner active" data-content="signup" ng-controller="Register">
+											<form action="#">
+												<div class="row form-group">
+													<div class="col-md-12">
+														<label for="username">Username</label>
+														<input type="text" class="form-control" id="username" ng-model="user.username"  placeholder="Username">
+													</div>
+												</div>
+												<div class="row form-group">
+													<div class="col-md-12">
+														<label for="email">Email</label>
+														<input type="text" class="form-control" id="email" ng-model="user.email"  placeholder="Email">
+													</div>
+												</div>
+												<div class="row form-group">
+													<div class="col-md-12">
+														<label for="password">Password</label>
+														<input type="password" class="form-control" id="password" ng-model="user.password"  placeholder="Password">
+													</div>
+												</div>
+												<div class="row form-group">
+													<div class="col-md-12">
+														<label for="password2">Repeat Password</label>
+														<input type="password" class="form-control" id="password2"  placeholder="Repeat Password">
+													</div>
+												</div>
+
+												<div class="row form-group">
+													<div class="col-md-12">
+														<input type="submit" class="btn btn-primary" value="Sign up" ng-click="register()">
+													</div>
+												</div>
+											</form>
+										</div>
+
+										<!-- Login tab -->
+										<div class="tab-content-inner" data-content="login" ng-controller="Login">
+											<form action="#">
+												<div class="row form-group">
+													<div class="col-md-12">
+														<label for="username">Username</label>
+														<input type="text" class="form-control" id="username" ng-model="user.username"  placeholder="Username">
+													</div>
+												</div>
+												<div class="row form-group">
+													<div class="col-md-12">
+														<label for="password">Password</label>
+														<input type="password" class="form-control" id="password" ng-model="user.password"  placeholder="Password">
+													</div>
+												</div>
+
+												<div class="row form-group">
+													<div class="col-md-12">
+														<input type="submit" class="btn btn-primary" value="Login" ng-click="login()">
+													</div>
+												</div>
+											</form>
+										</div>
+
+										<div class="tab-content-inner" data-content="change">
+											<form action="#">
+												<div class="row form-group">
+													<div class="col-md-12">
+														<label for="password">Old Password</label>
+														<input type="password" class="form-control" id="old-password">
+													</div>
+												</div>
+												<div class="row form-group">
+													<div class="col-md-12">
+														<label for="password">New Password</label>
+														<input type="password" class="form-control" id="new-password">
+													</div>
+												</div>
+												<div class="row form-group">
+													<div class="col-md-12">
+														<label for="password">Confirm Password</label>
+														<input type="password" class="form-control" id="confirm-password">
+													</div>
+												</div>
+
+												<div class="row form-group">
+													<div class="col-md-12">
+														<input type="submit" class="btn btn-primary" value="Change">
+													</div>
+												</div>
+											</form>
+										</div>
+
+										<div class="tab-content-inner" data-content="reset" ng-controller="MQTTCtrl">
+											<form action="#">
+												<div class="row form-group">
+													<div class="col-md-12">
+														<label for="password">Email</label>
+														<input type="text" class="form-control" id="email">
+													</div>
+												</div>
+
+												<div class="row form-group">
+													<div class="col-md-12">
+														<input type="submit" class="btn btn-primary" value="Get">
+													</div>
+												</div>
+											</form>
+										</div>
+
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+
+
+				</div>
+			</div>
+		</div>
+	</header>
+
+	<div class="gtco-section border-bottom">
+		<div class="gtco-container">
+			<div class="row">
+				<div class="col-md-8 col-md-offset-2 text-center gtco-heading">
+					<h2>System diagrams</h2>
+				</div>
+			</div>
+			<div class="row">
+				<div>
+					<a href="images/2.png" class="fh5co-project-item image-popup">
+						<figure>
+							<img src="images/2.png" alt="Image" class="img-responsive">
+						</figure>
+						<div class="fh5co-text">
+							<h2>System diagrams</h2>
+							<p>Artwork structure as well as the relationship between the components in the entire system</p>
+						</div>
+					</a>
+				</div>
+
+			</div>
+		</div>
+	</div>
+
+	<div id="gtco-features" class="border-bottom">
+		<div class="gtco-container">
+			<div class="row">
+				<div class="col-md-8 col-md-offset-2 text-center gtco-heading animate-box">
+					<h2>Smart Office Features</h2>
+					<p>Recently, when the world is moving to the Internet of Things era, everything is connected over the Internet. Connecting and managing electricial devices over the Internet are trending now. Smart office will settle it.</p>
+				</div>
+			</div>
+			<div class="row">
+
+				<div class="col-lg-4 col-md-4 col-sm-6">
+					<a href="images/7.jpeg" class="fh5co-project-item image-popup">
+						<figure>
+							<img src="images/7.jpeg" alt="Image" class="img-responsive">
+						</figure>
+						<div class="fh5co-text">
+							<h2>Control everywhere</h2>
+							<p>Update your device status on the go, over the Internet.</p>
+						</div>
+					</a>
+				</div>
+
+				<div class="col-lg-4 col-md-4 col-sm-6">
+					<a href="images/9.jpg" class="fh5co-project-item image-popup">
+						<figure>
+							<img src="images/9.jpg" alt="Image" class="img-responsive">
+						</figure>
+						<div class="fh5co-text">
+							<h2>Easy to Setup</h2>
+							<p>Just plug in and use, no need to replace all your system.</p>
+						</div>
+					</a>
+				</div>
+				<div class="col-lg-4 col-md-4 col-sm-6">
+					<a href="images/8.png" class="fh5co-project-item image-popup">
+						<figure>
+							<img src="images/8.png" alt="Image" class="img-responsive">
+						</figure>
+						<div class="fh5co-text">
+							<h2>Contextual Control</h2>
+							<p>Automation base on your setting or environment status.</p>
+						</div>
+					</a>
+				</div>
+
+				<div class="col-lg-4 col-md-4 col-sm-6">
+					<a href="images/5.jpg" class="fh5co-project-item image-popup">
+						<figure>
+							<img src="images/5.jpg" alt="Image" class="img-responsive">
+						</figure>
+						<div class="fh5co-text">
+							<h2>Energy Efficiency</h2>
+							<p>Monitoring all of your devices, no eclectricity is wasted.</p>
+						</div>
+					</a>
+				</div>
+
+				<div class="col-lg-4 col-md-4 col-sm-6">
+					<a href="images/10.jpg" class="fh5co-project-item image-popup">
+						<figure>
+							<img src="images/10.jpg" alt="Image" class="img-responsive">
+						</figure>
+						<div class="fh5co-text">
+							<h2>Simple to Operation</h2>
+							<p>Everything will be controlled by of a smart-phone, tablet or PC.</p>
+						</div>
+					</a>
+				</div>
+
+				<div class="col-lg-4 col-md-4 col-sm-6">
+					<a href="images/11.jpg" class="fh5co-project-item image-popup">
+						<figure>
+							<img src="images/11.jpg" alt="Image" class="img-responsive">
+						</figure>
+						<div class="fh5co-text">
+							<h2>Real-time management</h2>
+							<p>You can track the status of the equipment in the office 24/7.</p>
+						</div>
+					</a>
+				</div>
+
+			</div>
+		</div>
+	</div>
+
+	<div id="gtco-products">
+		<div class="gtco-container">
+			<div class="row">
+				<div class="col-md-8 col-md-offset-2 text-center gtco-heading">
+					<h2>More Products</h2>
+					<p>These are images that show the system details </p>
+				</div>
+			</div>
+			<div class="row">
+				<div class="owl-carousel owl-carousel-carousel">
+					<div class="item">
+						<a href="#"><img src="images/img_1.jpg" alt="Free HTML5 Bootstrap Template by FreeHTML5.co"></a>
+					</div>
+					<div class="item">
+						<a href="#"><img src="images/img_2.jpg" alt="Free HTML5 Bootstrap Template by FreeHTML5.co"></a>
+					</div>
+					<div class="item">
+						<a href="#"><img src="images/img_3.jpg" alt="Free HTML5 Bootstrap Template by FreeHTML5.co"></a>
+					</div>
+					<div class="item">
+						<a href="#"><img src="images/img_4.jpg" alt="Free HTML5 Bootstrap Template by FreeHTML5.co"></a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<footer id="gtco-footer" role="contentinfo">
+		<div class="gtco-container">
+			<div class="row row-p	b-md">
+
+				<div class="col-md-4">
+					<div class="gtco-widget">
+						<h3>About us</h3>
+						<h4>We are: </h4>
+						<ul class="gtco-footer-links">
+							<li>Pham Hoang Anh</li>
+							<li>Keo Hoang Phuong</li>
+							<li>Lai Trong Dao</li>
+							<li>Huynh Van Minh</li>
+						</ul>
+					</div>
+				</div>
+
+				<div class="col-md-4 col-md-push-1">
+					<div class="gtco-widget">
+						<h3>Links</h3>
+						<ul class="gtco-footer-links">
+							<li><a href="#">IoT Lab</a></li>
+							<li><a href="#">HCMUT</a></li>
+							<li><a href="#">CSE</a></li>
+							<li><a href="#">Terms of services</a></li>
+							<li><a href="#">Privacy Policy</a></li>
+						</ul>
+					</div>
+				</div>
+
+				<div class="col-md-4">
+					<div class="gtco-widget">
+						<h3>Get In Touch</h3>
+						<ul class="gtco-quick-contact">
+							<li><a href="#"><i class="icon-phone"></i> 0985894071</a></li>
+							<li><a href="#"><i class="icon-mail2"></i> bkiotlab@gmail.com</a></li>
+							<li><a href="#"><i class="icon-chat"></i> Live Chat</a></li>
+						</ul>
+					</div>
+				</div>
+
+			</div>
+
+			<div class="row copyright">
+				<div class="col-md-12">
+					<p class="pull-left">
+						<small class="block">&copy; 2016 Free HTML5. All Rights Reserved.</small>
+					</p>
+					<p class="pull-right">
+						<ul class="gtco-social-icons pull-right">
+							<li><a href="#"><i class="icon-twitter"></i></a></li>
+							<li><a href="#"><i class="icon-facebook"></i></a></li>
+							<li><a href="#"><i class="icon-linkedin"></i></a></li>
+							<li><a href="#"><i class="icon-dribbble"></i></a></li>
+						</ul>
+					</p>
+				</div>
+			</div>
+
+		</div>
+	</footer>
+	</div>
+
+	</div>
+
+	<div class="gototop js-top">
+		<a href="#" class="js-gotop"><i class="icon-arrow-up"></i></a>
+	</div>
+
+
+	</body>
+</html>

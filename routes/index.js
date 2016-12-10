@@ -1,6 +1,12 @@
 var express = require('express');
 var router = express.Router();
 var models = require('../models');
+var passport = require('passport');
+var passportJWT = require('passport-jwt');
+
+var authenticate = function(){
+  return passport.authenticate('jwt', {session: false});
+}
 // models.User.sync({
 //   force: true
 // }).then(function(){
@@ -13,11 +19,27 @@ var models = require('../models');
 // });
 /* GET home page. */
 router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Smart office' });
+  res.render('index');
 });
 
-router.get('/hihi', function(req, res, next) {
-  res.send('hihi');
+router.get('/gateways',authenticate(), function(req, res, next) {
+  res.render('gateway');
+});
+
+router.get('/nodes',authenticate(), function(req, res, next) {
+  res.render('node');
+});
+
+router.get('/devices',authenticate(), function(req, res, next) {
+  res.render('device');
+});
+
+router.get('/guide',authenticate(), function(req, res, next) {
+  res.render('tour');
+});
+
+router.get('/contact',authenticate(), function(req, res, next) {
+  res.render('contact');
 });
 
 router.post('/gateway', function(req, res){

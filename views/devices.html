@@ -1,0 +1,581 @@
+<!DOCTYPE HTML>
+<html>
+	<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>Smart Office - Home</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<meta name="description" content="Free HTML5 Website Template by FreeHTML5.co" />
+	<meta name="keywords" content="free website templates, free html5, free template, free bootstrap, free website template, html5, css3, mobile first, responsive" />
+	<meta name="author" content="FreeHTML5.co" />
+	<meta property="og:title" content=""/>
+	<meta property="og:image" content=""/>
+	<meta property="og:url" content=""/>
+	<meta property="og:site_name" content=""/>
+	<meta property="og:description" content=""/>
+	<meta name="twitter:title" content="" />
+	<meta name="twitter:image" content="" />
+	<meta name="twitter:url" content="" />
+	<meta name="twitter:card" content="" />
+
+	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+
+	<link href="https://fonts.googleapis.com/css?family=Roboto:300,400,700" rel="stylesheet">
+	<!-- <link type="text/css" href="css/bootstrap.min.css" /> -->
+	<link type="text/css" href="css/bootstrap-timepicker.min.css" />
+
+	<script src="js/jquery.min.js"></script>
+	<script src="js/bootstrap-timepicker.js"></script>
+    <script src="js/bootstrap-timepicker.min.js"></script>
+	
+	<!-- Animate.css -->
+	<link rel="stylesheet" href="css/animate.css">
+	<!-- Icomoon Icon Fonts-->
+	<link rel="stylesheet" href="css/icomoon.css">
+	<!-- Themify Icons-->
+	<link rel="stylesheet" href="css/themify-icons.css">
+	<!-- Bootstrap  -->
+	<link rel="stylesheet" href="css/bootstrap.css">
+
+	<!-- Magnific Popup -->
+	<link rel="stylesheet" href="css/magnific-popup.css">
+
+	<!-- Owl Carousel  -->
+	<link rel="stylesheet" href="css/owl.carousel.min.css">
+	<link rel="stylesheet" href="css/owl.theme.default.min.css">
+
+	<!-- Theme style  -->
+	<link rel="stylesheet" href="css/style.css">
+
+	<!-- Modernizr JS -->
+	<script src="js/modernizr-2.6.2.min.js"></script>
+	<!-- FOR IE9 below -->
+	<!--[if lt IE 9]>
+	<script src="js/respond.min.js"></script>
+	<![endif]-->
+
+	</head>
+	<body>
+<!-- Modal -->
+	<div class="modal fade" id="changeModal" role="dialog">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+    				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+    				<center>
+    					<h2 id="myModalLabel" style="font-weight: bold;">Change value</h2>
+    				</center>
+  				</div>
+  				<div class="modal-body">
+  					<div>
+  						<center>
+  							<h3>Min</h3>
+  						</center>
+  					</div>
+  					<div>
+  						<input type="text" class="form-control" id="min" style="text-align: center;">
+  					</div>
+  					<div style="margin-top: 20px;">
+  						<center>
+  							<h3>Max</h3>
+  						</center>
+  					</div>
+  					<div>
+  						<input type="text" class="form-control" id="max" style="text-align: center;">
+  					</div>
+  					<div style="margin-top: 20px;">
+  						<center>
+  							<h3>Time start</h3>
+  						</center>
+  					</div>
+    				<div class="input-group bootstrap-timepicker timepicker">
+            			<input id="timeStart" type="time" class="form-control input-small" style="text-align: center;">
+            			<span class="input-group-addon"><i class="glyphicon glyphicon-time"></i></span>
+       				</div>
+       				<div style="margin-top: 20px;">
+  						<center>
+  							<h3>Time End</h3>
+  						</center>
+  					</div>
+       				<div class="input-group bootstrap-timepicker timepicker">
+            			<input id="timeEnd" type="time" class="form-control input-small" style="text-align: center;">
+            			<span class="input-group-addon"><i class="glyphicon glyphicon-time"></i></span>
+       				</div>
+  			</div>
+  				<div class="modal-footer">
+  					<center>
+  						<button class="btn btn-success" data-dismiss="modal" aria-hidden="true" style="width: 200px;">Save</button>
+  					</center>
+    				
+  				</div>
+			</div>
+		</div>
+	</div>
+
+<!-- Modal control manual condition-->
+  	<div class="modal fade" id="editModal" role="dialog">
+    	<div class="modal-dialog modal-sm">
+      		<div class="modal-content">
+        		<div class="modal-header">
+          			<button type="button" class="close" data-dismiss="modal">&times;</button>
+          			<center>
+          				<h4 class="modal-title">Do you want edit ?</h4>
+          			</center>
+       			</div>
+       			<div class="modal-body">
+       				<center>
+       					<input type="number" name="points" step="1" value="10" style="text-align: center;">
+       				</center>
+					
+       			</div>
+        		<div class="modal-footer">
+          			<center>
+  						<button class="btn" data-dismiss="modal" aria-hidden="true" style="background-color: red;color: black;">Save</button>
+  					</center>
+        		</div>
+      		</div>
+   		</div>
+  	</div>
+
+<!-- Modal edit Devices-->
+
+	<div class="modal fade" id="editDeviceModal" role="dialog">
+    	<div class="modal-dialog">
+      		<div class="modal-content">
+      			<div class="modal-header">
+          			<button type="button" class="close" data-dismiss="modal">&times;</button>
+          			<center>
+          				<h4 class="modal-title">Edit device</h4>
+          			</center>
+       			</div>
+       			<div class="modal-body">
+       				<div style="margin-top: 10px;">
+  						<center>
+  							<h3 style="color: green">Assign type of device</h3>
+  						</center>
+  					</div>
+       				<div style="height: 70px">
+       					<div class="col-md-4 col-xs-2" style="float: left;"> 
+       						<img src="images/condition-on.png" style="width: 40px">
+       					</div>
+	       				<center>
+	       					<h2 class="col-xs-8 col-md-4">CONDITION</h2>
+	       					<input type="radio" name="condition-type">
+	       				</center>
+       				</div>
+       				<div style="height: 70px;">
+       					<div class="col-md-4 col-xs-2" style="float: left;"> 
+       						<img src="images/light-on.png" style="width: 40px">
+       					</div>
+	       				<center>
+	       					<h2 class="col-xs-8 col-md-4">LIGHT</h2>
+	       					<input type="radio" name="light-type">
+	       				</center>
+       				</div>
+       				<div style="height: 70px;">
+       					<div class="col-md-4 col-xs-2" style="float: left;"> 
+       						<img src="images/fan-on.png" style="width: 40px">
+       					</div>
+	       				<center>
+	       					<h2 class="col-xs-8 col-md-4">FAN</h2>
+	       					<input type="radio" name="fan-type">
+	       				</center>
+       				</div>
+       				<div>
+	  					<center>
+	  						<h3 style="color: green">Set name for device</h3>
+	  					</center>
+	  				</div>
+	  				<div>
+	  					<input type="text" class="form-control" id="name" style="text-align: center;">
+	  				</div>
+	  				<div style="margin-top: 20px;">
+	  					<center>
+	  						<h3 style="color: green">Set button for device</h3>
+	  					</center>
+	  				</div>
+	  				<div style="height: 60px">
+	  					<div class="col-md-3 col-xs-3">
+	  						<center>
+	  							<h4 style="float: left;">1</h4>
+	  							<input type="radio" name="btn1">
+	  						</center>
+	  					</div>
+	  					<div class="col-md-3 col-xs-3" style="float: left;">
+	  						<center>
+	  							<h4 style="float: left;">2</h4>
+	  							<input type="radio" name="btn2">
+	  						</center>
+	  					</div>
+	  					<div class="col-md-3 col-xs-3" style="float: left;">
+	  						<center>
+	  							<h4 style="float: left;">3</h4>
+	  							<input type="radio" name="btn3">
+	  						</center>
+	  					</div>
+	  					<div class="col-md-3 col-xs-3" style="float: left;">
+	  						<center>
+	  							<h4 style="float: left;">4</h4>
+	  							<input type="radio" name="btn4">
+	  						</center>
+	  					</div>
+	  					<div class="col-md-3 col-xs-3">
+	  						<center>
+	  							<h4 style="float: left;">5</h4>
+	  							<input type="radio" name="btn5">
+	  						</center>
+	  					</div>
+	  					<div class="col-md-3 col-xs-3" style="float: left;">
+	  						<center>
+	  							<h4 style="float: left;">6</h4>
+	  							<input type="radio" name="btn6">
+	  						</center>
+	  					</div>
+	  					<div class="col-md-3 col-xs-3" style="float: left;">
+	  						<center>
+	  							<h4 style="float: left;">7</h4>
+	  							<input type="radio" name="btn7">
+	  						</center>
+	  					</div>
+	  					<div class="col-md-3 col-xs-3" style="float: left;">
+	  						<center>
+	  							<h4 style="float: left;">8</h4>
+	  							<input type="radio" name="btn8">
+	  						</center>
+	  					</div>
+	  				</div>
+       			</div>
+
+        		<div class="modal-footer">
+          			<center>
+  						<button class="btn btn-danger" data-dismiss="modal" aria-hidden="true" style="width: 200px;">Submit</button>
+  					</center>
+        		</div>
+      		</div>
+      	</div>
+    </div>
+
+    <!-- Modal Profile-->
+  	<div class="modal fade" id="profileModal" role="dialog">
+    	<div class="modal-dialog">
+      		<div class="modal-content">
+        		<div class="modal-header">
+          			<button type="button" class="close" data-dismiss="modal" style="float: left;">&times;</button>
+          			<center>
+          				<img src="images/profile.png" style="width: 50%">
+          				<h2 class="modal-title" style="font-weight: bold;">keo hoang phuong</h2>
+          			</center>
+       			</div>
+       			 <div class="modal-body" style="height: 75px;">
+       			 	<!-- <img src="images/broker.png" style="float: left;"> -->
+       			 	<div class="input-group col-md-8 col-xs-6" style="float: left;">
+       			 		<span class="input-group-addon"><i class="fa fa-arrows fa" aria-hidden="true"></i></span>
+       			 		<input type="text" class="form-control" id="broker" style="text-align: center;" value="iot.eclipse.org">
+       			 	</div>
+       			 	<div class="col-md-4 col-xs-6" style="float: right;">
+       			 		<button class="btn btn-success" style="height: 46px;">Change broker</button>
+       			 	</div>
+
+       			 </div>
+        		<div class="modal-footer">
+        			<center>
+        				<button type="button" class="btn btn-success" data-dismiss="modal" style="float: left;">Change password</button>
+        				<button type="button" class="btn btn-danger" data-dismiss="modal" style="float: right;">Logout</button>
+        			</center>
+        		</div>
+      		</div>
+   		</div>
+  	</div>
+		
+	<div class="gtco-loader"></div>
+	
+	<div id="page">
+
+	
+	<div class="page-inner">
+	<nav class="gtco-nav gateway" role="navigation">
+		<div class="gtco-container">
+
+			<div class="row">
+				<div class="col-sm-4 col-xs-12" style="padding-top: 3px">
+					<div id="gtco-logo"><a href="index.html">Smart Office</a></div>
+				</div>
+
+				<div class="col-xs-8 text-right menu-1">
+					<ul>
+						<li><a href="tour.html">Guide</a></li>
+						<li><a href="contact.html">Contact</a></li>
+						<li class="btn-cta active"><a href="gateway.html"><span>Get started</span></a></li>
+						<li id="user"><a href="#profileModal" data-toggle="modal">User name</a></li>
+					</ul>
+				</div>
+			</div>
+
+		</div>
+	</nav>
+
+	<div class="row" style="padding-top: 100px;">
+		<center>
+			<h1 style="font-size: -webkit-xxx-large; font-style: inherit; font-weight: bold; color: cadetblue;">Node 1</h1>
+		</center>
+	</div>
+
+	<div class="row" style="padding-top: 20px;">
+		<center>
+			<div class="col-md-4 col-xs-12" id="tem" style="float: left;">
+				<img class="img-devices" src="images/tem.png" width="200" height="200">
+				<h1 class="h1-info">Tem</h1>
+			</div>
+			<div class="col-md-4 col-xs-12" id="lux" style="float: left;">
+				<img class="img-devices" src="images/lux.png" width="200" height="200">
+				<h1 class="h1-info">Lux</h1>
+			</div>
+			<div class="col-md-4 col-xs-12" id="hum" style="float: left;">
+				<img class="img-devices" src="images/hum.png" width="200" height="200">
+				<h1 class="h1-info">Hum</h1>
+			</div>
+		</center>
+	</div>
+
+	<div style="margin-top: 50px">
+		<div class="row div-devices-cell" >
+			<center>
+				<div class="col-md-4 col-xs-12" id="tem" style="float: left;">
+					<img class="img-devices" src="images/fan-on.png" width="100" height="100" style="float: left; margin-top: 7px;">
+					<h1 class="h1-name-cell">Fan</h1>
+				</div>
+				<div class="col-md-8 col-xs-12" style="float: left;">
+					<input class="img-devices-cell" type="image" src="images/status-on.png" alt="Submit" width="100" height="100" style="float: left;margin-left: 10px; margin-top: 5px;">
+					<input class="img-devices-cell" type="image" src="images/mode-manual.png" alt="Submit" width="100" height="100" style="margin-right: 100px; margin-top: 5px;">
+					<input href="#editDeviceModal" role="button" data-toggle="modal" class="img-devices-cell-1" type="image" src="images/setting.png" alt="Submit" width="80" height="80" style="">
+					<input class="img-devices-cell-1" type="image" src="images/delete.png" alt="Submit" width="80" height="80" style="float: right;margin-left: 10px; margin-top: 5px;">
+					<input href="#" role="button" data-toggle="modal" class="img-devices-cell-1" type="image" src="images/edit.png" alt="Submit" width="80" height="80" style="float: right;">
+			</center>
+		</div>
+		<div class="row div-devices-cell" >
+			<center>
+				<div class="col-md-4 col-xs-12" id="tem" style="float: left;">
+					<img class="img-devices" src="images/light-on.png" width="100" height="100" style="float: left; margin-top: 7px;">
+					<h1 class="h1-name-cell">Light</h1>
+				</div>
+				<div class="col-md-8 col-xs-12" style="float: left;">
+					<input class="img-devices-cell" type="image" src="images/status-on.png" alt="Submit" width="100" height="100" style="float: left;margin-left: 10px; margin-top: 5px;">
+					<input class="img-devices-cell" type="image" src="images/mode-manual.png" alt="Submit" width="100" height="100" style="margin-right: 100px; margin-top: 5px;">
+					<input href="#editDeviceModal" role="button" data-toggle="modal" class="img-devices-cell-1" type="image" src="images/setting.png" alt="Submit" width="80" height="80" style="">
+					<input class="img-devices-cell-1" type="image" src="images/delete.png" alt="Submit" width="80" height="80" style="float: right;margin-left: 10px; margin-top: 5px;">
+					<input href="#" role="button" data-toggle="modal" class="img-devices-cell-1" type="image" src="images/edit.png" alt="Submit" width="80" height="80" style="float: right;">
+				</div>
+			</center>
+		</div>
+		<div class="row div-devices-cell" >
+			<center>
+				<div class="col-md-4 col-xs-12" id="tem" style="float: left;">
+					<img class="img-devices" src="images/condition-off.png" width="100" height="100" style="float: left; margin-top: 7px;">
+					<h1 class="h1-name-cell">Condition</h1>
+				</div>
+				<div class="col-md-8 col-xs-12" style="float: left;">
+					<input class="img-devices-cell" type="image" src="images/status-on.png" alt="Submit" width="100" height="100" style="float: left;margin-left: 10px; margin-top: 5px;">
+					<input class="img-devices-cell" type="image" src="images/mode-manual.png" alt="Submit" width="100" height="100" style="margin-right: 100px; margin-top: 5px;">
+					<input href="#editDeviceModal" role="button" data-toggle="modal" class="img-devices-cell-1" type="image" src="images/setting.png" alt="Submit" width="80" height="80" style="">
+					<input class="img-devices-cell-1" type="image" src="images/delete.png" alt="Submit" width="80" height="80" style="float: right;margin-left: 10px; margin-top: 5px;">
+					<input href="#editModal" role="button" data-toggle="modal" class="img-devices-cell-1" type="image" src="images/edit.png" alt="Submit" width="80" height="80" style="float: right;">
+				</div>
+			</center>
+		</div>
+
+		<!-- Auto cell -->
+
+		<div class="row div-devices-cell" >
+			<center>
+				<div class="col-md-4 col-xs-12" id="tem" style="float: left;">
+					<img class="img-devices" src="images/condition-off.png" width="100" height="100" style="float: left; margin-top: 7px;">
+					<h1 class="h1-name-cell">Condition</h1>
+				</div>
+				<div class="col-md-8 col-xs-12">
+					<div>
+						<input class="img-devices-cell" type="image" src="images/status-on.png" alt="Submit" width="100" height="100" style="float: left;margin-left: 10px; margin-top: 5px;">
+						<input class="img-devices-cell" type="image" src="images/mode-manual.png" alt="Submit" width="100" height="100" style="margin-right: 100px; margin-top: 5px;">
+						<input href="#editDeviceModal" role="button" data-toggle="modal" class="img-devices-cell-1" type="image" src="images/setting.png" alt="Submit" width="80" height="80" style="">
+						<input class="img-devices-cell-1" type="image" src="images/delete.png" alt="Submit" width="80" height="80" style="float: right;margin-left: 10px; margin-top: 5px;">
+						<input href="#changeModal" role="button" data-toggle="modal" class="img-devices-cell-1" type="image" src="images/edit.png" alt="Submit" width="80" height="80" style="float: right;">
+					</div>
+					<div>
+						<div id="div-tem" class="col-md-3 col-xs-3" style="float: left;">
+							<script type="text/javascript">
+								function detectmob() {
+								   if(window.screen.width < 991) {
+								     return true;
+								   } else {
+								     return false;
+								   }
+								}
+								if (detectmob() == true) { 
+									var html = [
+											   	'<img class="img-devices-cell-3" src="images/hum.png">',
+											   	'<h4 style="float: left;padding-top:5px;">1800</h4>'
+											   ].join('');
+									document.getElementById('div-tem').innerHTML = "";
+									document.getElementById('div-tem').innerHTML += html;
+								} else {
+									var html = ['<img class="img-devices-cell-5" src="images/hum.png">',
+											   '<h3 style="float: left;padding-top:5px;">1800</h3>'
+											   ].join('');
+									document.getElementById('div-tem').innerHTML = "";
+									document.getElementById('div-tem').innerHTML += html;
+								}
+							</script>
+							
+						</div>
+						<div id="div-clock" class="col-md-4 col-xs-5" style="float: left;">
+							<script type="text/javascript">
+								function detectmob() {
+								   if(window.screen.width < 991) {
+								     return true;
+								   } else {
+								     return false;
+								   }
+								}
+								if (detectmob() == true) { 
+									var html1 = [
+											   	'<img class="img-devices-cell-2" src="images/clock.png">',
+											   	'<h4 style="float: left;padding-top:5px;">07h30-18h00</h4>'
+											   ].join('');
+									document.getElementById('div-clock').innerHTML = "";
+									document.getElementById('div-clock').innerHTML += html1;
+								} else {
+									var html1 = ['<img class="img-devices-cell-2" src="images/clock.png">',
+											   '<h3 style="float: left;padding-top:5px;">07h30-18h00</h3>'
+											   ].join('');
+									document.getElementById('div-clock').innerHTML = "";
+									document.getElementById('div-clock').innerHTML += html1;
+								}
+							</script>
+						</div>
+						<div id="div-limit" class="col-md-4 col-xs-4" style="float: right;">
+							<script type="text/javascript">
+								function detectmob() {
+								   if(window.screen.width < 991) {
+								     return true;
+								   } else {
+								     return false;
+								   }
+								}
+								if (detectmob() == true) { 
+									var html1 = [
+											   	'<img class="img-devices-cell-5" src="images/limit.png">',
+											   	'<h4 style="float: left;padding-top:5px;">1800-2000</h4>'
+											   ].join('');
+									document.getElementById('div-limit').innerHTML = "";
+									document.getElementById('div-limit').innerHTML += html1;
+								} else {
+									var html1 = ['<img class="img-devices-cell-2" src="images/limit.png">',
+											   '<h3 style="float: left;padding-top:5px;">1800-2000</h3>'
+											   ].join('');
+									document.getElementById('div-limit').innerHTML = "";
+									document.getElementById('div-limit').innerHTML += html1;
+								}
+							</script>
+						</div>
+					</div>
+				</div>
+			</center>
+		</div>
+
+		<!-- Setting cell -->
+		<div class="row div-devices-cell" >
+			<input type="Submit" name="turnoffall" class="btn btn-danger" style="margin: 20px; float: left; width: 400px;" value="Turn Off All">
+			<a href="setting.html" style="color: white; width: 400px;" ><button type="button" class="btn btn-success" style="margin: 20px; float: right; width: 400px;">Setting port</button></a>
+		</div>
+
+	</div>
+
+
+	<footer id="gtco-footer" role="contentinfo">
+		<div class="gtco-container">
+			<div class="row row-p	b-md">
+
+				<div class="col-md-4">
+					<div class="gtco-widget">
+						<h3>About us</h3>
+						<h4>We are: </h4>
+						<ul class="gtco-footer-links">
+							<li>Pham Hoang Anh</li>
+							<li>Keo Hoang Phuong</li>
+							<li>Lai Trong Dao</li>
+							<li>Huynh Van Minh</li>
+						</ul>
+					</div>
+				</div>
+
+				<div class="col-md-4 col-md-push-1">
+					<div class="gtco-widget">
+						<h3>Links</h3>
+						<ul class="gtco-footer-links">
+							<li><a href="#">IoT Lab</a></li>
+							<li><a href="#">HCMUT</a></li>
+							<li><a href="#">CSE</a></li>
+							<li><a href="#">Terms of services</a></li>
+							<li><a href="#">Privacy Policy</a></li>
+						</ul>
+					</div>
+				</div>
+
+				<div class="col-md-4">
+					<div class="gtco-widget">
+						<h3>Get In Touch</h3>
+						<ul class="gtco-quick-contact">
+							<li><a href="#"><i class="icon-phone"></i> 0985894071</a></li>
+							<li><a href="#"><i class="icon-mail2"></i> bkiotlab@gmail.com</a></li>
+							<li><a href="#"><i class="icon-chat"></i> Live Chat</a></li>
+						</ul>
+					</div>
+				</div>
+
+			</div>
+
+			<div class="row copyright">
+				<div class="col-md-12">
+					<p class="pull-left">
+						<small class="block">&copy; 2016 Free HTML5. All Rights Reserved.</small>
+					</p>
+					<p class="pull-right">
+						<ul class="gtco-social-icons pull-right">
+							<li><a href="#"><i class="icon-twitter"></i></a></li>
+							<li><a href="#"><i class="icon-facebook"></i></a></li>
+							<li><a href="#"><i class="icon-linkedin"></i></a></li>
+							<li><a href="#"><i class="icon-dribbble"></i></a></li>
+						</ul>
+					</p>
+				</div>
+			</div>
+
+		</div>
+	</footer>
+	</div>
+
+	</div>
+
+	<div class="gototop js-top">
+		<a href="#" class="js-gotop"><i class="icon-arrow-up"></i></a>
+	</div>
+
+	<!-- jQuery -->
+	<!-- jQuery Easing -->
+	<script src="js/jquery.easing.1.3.js"></script>
+	<!-- Bootstrap -->
+	<script src="js/bootstrap.min.js"></script>
+	<!-- Waypoints -->
+	<script src="js/jquery.waypoints.min.js"></script>
+	<!-- Carousel -->
+	<script src="js/owl.carousel.min.js"></script>
+	<!-- countTo -->
+	<script src="js/jquery.countTo.js"></script>
+	<!-- Magnific Popup -->
+	<script src="js/jquery.magnific-popup.min.js"></script>
+	<script src="js/magnific-popup-options.js"></script>
+	<!-- Main -->
+	<script src="js/main.js"></script>
+
+	</body>
+</html>
+

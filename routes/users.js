@@ -5,6 +5,7 @@ var passportJWT = require('passport-jwt');
 var ExtractJwt = passportJWT.ExtractJwt;
 var Strategy = passportJWT.Strategy;
 var models = require('../models');
+var mqtt = require('mqtt');
 var jwt = require('jsonwebtoken');
 var opts = {
   secretOrKey: 'hihihehe',
@@ -75,7 +76,7 @@ router.post('/login',function(req, res){
             username: user.username,
             email: user.email
           }
-          var token = jwt.sign(usr,'hihihehe',{expiresIn:30000});
+          var token = jwt.sign(usr,'hihihehe',{expiresIn:9999999999});
           res.json({
             success: true,
             data: {
@@ -247,6 +248,22 @@ router.post('/editnode', authenticate(), function(req, res){
 });
 
 router.post('/deletenode', authenticate(), function(req, res){
+  var client  = mqtt.connect('mqtt://test.mosquitto.org');
+
+  client.on('connect', function () {
+    console.log('connected to mqtt');
+    client.subscribe(req.body.G_MAC+'/'+req.body.N_MAC+'/s');
+    var message = {
+      request: 'deleteNode'
+    }
+    client.publish(req.body.G_MAC+'/'+req.body.N_MAC,JSON.stringify(message))
+  });
+
+  client.on('message', function (topic, message) {
+    // message is Buffer
+    console.log(message.toString());
+    client.end();
+  });
   models.Gateway.getGatewayByMAC(req.body.G_MAC, function(gw){
     models.Node.getNodeByMAC(req.body.N_MAC, function(node){
       gw.removeNode(node).then(function(){
