@@ -256,6 +256,8 @@ router.post('/deletenode', authenticate(), function(req, res){
     var message = {
       request: 'deleteNode'
     }
+    console.log(req.body.G_MAC+'/'+req.body.N_MAC);
+    console.log(message);
     client.publish(req.body.G_MAC+'/'+req.body.N_MAC,JSON.stringify(message))
   });
 
