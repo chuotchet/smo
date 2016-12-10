@@ -47,6 +47,7 @@ router.post('/gateway', function(req, res){
     G_MAC: req.body.G_MAC,
     key: req.body.key
   }
+  console.log(data);
   models.Gateway.getGatewayByMAC(req.body.G_MAC, function(gw){
     if (!gw){
       models.Gateway.create(data);

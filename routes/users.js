@@ -120,6 +120,8 @@ router.post('/getgateways', authenticate(), function(req, res){
 });
 
 router.post('/addgateway', authenticate(), function(req, res){
+  console.log('addgateway');
+  console.log(req.body.G_MAC);
   models.Gateway.getGatewayByMAC(req.body.G_MAC, function(gw){
     if (gw.key!=req.body.key){
       res.send('Key is not correct!');
