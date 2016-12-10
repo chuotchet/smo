@@ -248,34 +248,33 @@ router.post('/editnode', authenticate(), function(req, res){
 });
 
 router.post('/deletenode', authenticate(), function(req, res){
+  var client  = mqtt.connect('mqtt://iot.eclipse.org');
 
+  client.on('connect', function () {
+    console.log('connected to mqtt');
+    client.subscribe(req.body.G_MAC+'/'+req.body.N_MAC+'/s');
+    var message = {
+      request: 'deleteNode'
+    }
+    console.log(req.body.G_MAC+'/'+req.body.N_MAC);
+    console.log(message);
+    client.publish(req.body.G_MAC+'/'+req.body.N_MAC,JSON.stringify(message))
+  });
+
+  client.on('message', function (topic, message) {
+    // message is Buffer
+    console.log(message.toString());
+    client.end();
+  });
   models.Gateway.getGatewayByMAC(req.body.G_MAC, function(gw){
     models.Node.getNodeByMAC(req.body.N_MAC, function(node){
       gw.removeNode(node).then(function(){
         gw.getNodes().then(function(nodes){
-          var client  = mqtt.connect('mqtt://test.mosquitto.org');
-
-          client.on('connect', function () {
-            console.log('connected to mqtt');
-            client.subscribe(req.body.G_MAC+'/'+req.body.N_MAC+'/s');
-            var message = {
-              request: 'deleteNode'
+          res.json({
+            success: true,
+            data: {
+              nodes: nodes
             }
-            console.log(req.body.G_MAC+'/'+req.body.N_MAC);
-            console.log(message);
-            client.publish(req.body.G_MAC+'/'+req.body.N_MAC,JSON.stringify(message))
-          });
-
-          client.on('message', function (topic, message) {
-            // message is Buffer
-            console.log(message.toString());
-            client.end();
-            res.json({
-              success: true,
-              data: {
-                nodes: nodes
-              }
-            });
           });
         });
       });
