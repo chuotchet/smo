@@ -54,13 +54,8 @@ router.post('/gateway', function(req, res){
       res.send('key added!');
     }
     else {
-      models.Gateway.update({
-        key: req.body.key
-      }, {
-        where: {
-          G_MAC: req.body.MAC
-        }
-      }).then(function(){
+      gw.key = req.body.key;
+      gw.save().then(function(){
         res.send('key changed!');
       });
     }
