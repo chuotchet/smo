@@ -2,7 +2,6 @@ var express = require('express');
 var router = express.Router();
 var models = require('../models');
 var passport = require('passport');
-var passportJWT = require('passport-jwt');
 
 var authenticate = function(){
   return passport.authenticate('jwt', {session: false});
@@ -22,6 +21,10 @@ router.get('/', function(req, res, next) {
   res.render('index');
 });
 
+router.get('/test',authenticate(), function(req, res, next) {
+  res.send('test');
+});
+
 router.get('/gateways',authenticate(), function(req, res, next) {
   res.render('gateway');
 });
@@ -34,11 +37,11 @@ router.get('/devices',authenticate(), function(req, res, next) {
   res.render('device');
 });
 
-router.get('/guide',authenticate(), function(req, res, next) {
+router.get('/guide', function(req, res, next) {
   res.render('tour');
 });
 
-router.get('/contact',authenticate(), function(req, res, next) {
+router.get('/contact', function(req, res, next) {
   res.render('contact');
 });
 

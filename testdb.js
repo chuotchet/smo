@@ -1,8 +1,8 @@
 var models = require("./models");
 
-// models.Gateway.getGatewayByMAC('qwe', function(gw){
-//   console.log(gw.dataValues);
-// });
+models.Gateway.getGatewayByMAC('ahihi', function(gw){
+  console.log(gw.key);
+});
 var data = {
   N_MAC: 'dfd',
   key: 'dd',

@@ -7,9 +7,18 @@ var Strategy = passportJWT.Strategy;
 var models = require('../models');
 var mqtt = require('mqtt');
 var jwt = require('jsonwebtoken');
+var cookieExtractor = function(req) {
+    var token = null;
+    if (req && req.cookies)
+    {
+        token = req.cookies['token'];
+    }
+    console.log(token);
+    return token;
+};
 var opts = {
   secretOrKey: 'hihihehe',
-  jwtFromRequest: ExtractJwt.fromHeader('token')
+  jwtFromRequest: ExtractJwt.fromExtractors([ExtractJwt.fromHeader('token'), cookieExtractor])
 }
 
 passport.use(new Strategy(opts, function(jwt_payload, done){

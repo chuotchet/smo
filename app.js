@@ -27,12 +27,14 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use('/angular', express.static(path.join(__dirname, 'angular')));
 
-app.use('/', routes);
-app.use('/users', users);
-
 // Passport init
 app.use(passport.initialize());
 app.use(passport.session());
+
+app.use('/', routes);
+app.use('/users', users);
+
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

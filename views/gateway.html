@@ -3,55 +3,12 @@
 	<head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>Smart Office - Home</title>
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<meta name="description" content="Free HTML5 Website Template by FreeHTML5.co" />
-	<meta name="keywords" content="free website templates, free html5, free template, free bootstrap, free website template, html5, css3, mobile first, responsive" />
-	<meta name="author" content="FreeHTML5.co" />
-	<meta property="og:title" content=""/>
-	<meta property="og:image" content=""/>
-	<meta property="og:url" content=""/>
-	<meta property="og:site_name" content=""/>
-	<meta property="og:description" content=""/>
-	<meta name="twitter:title" content="" />
-	<meta name="twitter:image" content="" />
-	<meta name="twitter:url" content="" />
-	<meta name="twitter:card" content="" />
-
-	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
-
-	<link href="https://fonts.googleapis.com/css?family=Roboto:300,400,700" rel="stylesheet">
-	
-	<!-- Animate.css -->
-	<link rel="stylesheet" href="css/animate.css">
-	<!-- Icomoon Icon Fonts-->
-	<link rel="stylesheet" href="css/icomoon.css">
-	<!-- Themify Icons-->
-	<link rel="stylesheet" href="css/themify-icons.css">
-	<!-- Bootstrap  -->
-	<link rel="stylesheet" href="css/bootstrap.css">
-
-	<!-- Magnific Popup -->
-	<link rel="stylesheet" href="css/magnific-popup.css">
-
-	<!-- Owl Carousel  -->
-	<link rel="stylesheet" href="css/owl.carousel.min.css">
-	<link rel="stylesheet" href="css/owl.theme.default.min.css">
-
-	<!-- Theme style  -->
-	<link rel="stylesheet" href="css/style.css">
-
-	<!-- Modernizr JS -->
-	<script src="js/modernizr-2.6.2.min.js"></script>
-	<!-- FOR IE9 below -->
-	<!--[if lt IE 9]>
-	<script src="js/respond.min.js"></script>
-	<![endif]-->
+	<title>Smart Office - Gateway</title>
 
 	</head>
 	<body>
-	<!-- Modal -->
-	<div class="modal fade" id="myModal" role="dialog">
+	<!-- Modal Add-->
+	<div class="modal fade" id="myModal" role="dialog" ng-controller="AddGateway">
 	    <div class="modal-dialog">
 	      <!-- Modal content-->
 	      	<div class="modal-content">
@@ -60,40 +17,36 @@
 		          	<center>
 		          		<h2 class="modal-title">Add gateway</h2>
 		          	</center>
-		          	
+
 		        </div>
 		        <div class="modal-body">
 		          	<form>
 			          	<div class="form-group">
-					    	<label for="pwd">Name:</label>
-					    	<input type="password" class="form-control" id="pwd">
+					    	<label for="name">Name:</label>
+					    	<input type="text" class="form-control" id="name" ng-model="gw.name">
 					  	</div>
 				  		<div class="form-group">
-				    		<label for="email">N_MAC:</label>
-				    		<input type="email" class="form-control" id="email">
+				    		<label for="gmac">G_MAC:</label>
+				    		<input type="text" class="form-control" id="gmac" ng-model="gw.G_MAC">
 				  		</div>
 				  		<div class="form-group">
-				    		<label for="email">G_MAC:</label>
-				    		<input type="email" class="form-control" id="email">
-				  		</div>
-				  		<div class="form-group">
-				    		<label for="pwd">Key:</label>
-				    		<input type="password" class="form-control" id="pwd">
+				    		<label for="key">Key:</label>
+				    		<input type="text" class="form-control" id="key" ng-model="gw.key">
 				  		</div>
 					</form>
 	        	</div>
 	        	<div class="modal-footer">
 	        		<center>
-	        			<button type="button" class="btn btn-success" data-dismiss="modal">Add gateway</button>
+	        			<button type="button" class="btn btn-success" data-dismiss="modal" ng-click="addGateway()">Add gateway</button>
 	        		</center>
-	          		
+
 	        	</div>
 	     	</div>
 	    </div>
   	</div>
 
   <!-- Modal Change name-->
-	<div class="modal fade" id="editModal" role="dialog">
+	<div class="modal fade" id="editModal" role="dialog" ng-controller="EditGateway">
 	    <div class="modal-dialog modal-sm">
 	      <!-- Modal content-->
 	      	<div class="modal-content">
@@ -102,7 +55,7 @@
 		          	<center>
 		          		<h2 class="modal-title">Change name</h2>
 		          	</center>
-		          	
+
 		        </div>
 		        <div class="modal-body">
 		        	<form>
@@ -110,23 +63,23 @@
 		          			<center>
 		          				<label for="pwd">New Name:</label>
 		          			</center>
-				    		<input type="text" class="form-control" id="pwd" style="text-align: center;">
+				    		<input type="text" class="form-control" id="pwd" style="text-align: center;" ng-model="gwEdit.name">
 				  		</div>
 					</form>
 		        </div>
 		        <div class="modal-footer">
 		        	<center>
-		        		<button type="button" class="btn btn-danger" data-dismiss="modal">Change</button>
+		        		<button type="button" class="btn btn-danger" data-dismiss="modal" ng-click="editGateway()">Change</button>
 		        	</center>
-		          	
+
 		        </div>
 	      	</div>
-	      
+
 	    </div>
  	</div>
 
  	<!-- Modal Delete-->
-  	<div class="modal fade" id="deleteModal" role="dialog">
+  	<div class="modal fade" id="deleteModal" role="dialog" ng-controller="DeleteGateway">
     	<div class="modal-dialog modal-sm">
       		<div class="modal-content">
         		<div class="modal-header">
@@ -134,11 +87,11 @@
           			<center>
           				<h4 class="modal-title">Do you want delete ?</h4>
           			</center>
-          			
+
        			</div>
         		<div class="modal-footer">
           			<button type="button" class="btn btn-success" data-dismiss="modal" style="float: left;">Cancel</button>
-          			<button type="button" class="btn btn-danger" data-dismiss="modal" style="float: right;">Delete</button>
+          			<button type="button" class="btn btn-danger" data-dismiss="modal" ng-click="deleteGateway()" style="float: right;">Delete</button>
         		</div>
       		</div>
    		</div>
@@ -175,12 +128,12 @@
       		</div>
    		</div>
   	</div>
-		
+
 	<div class="gtco-loader"></div>
-	
+
 	<div id="page">
 
-	
+
 	<div class="page-inner">
 	<nav class="gtco-nav gateway" role="navigation">
 		<div class="gtco-container">
@@ -205,12 +158,11 @@
 
 	<div id="gtco-features" class="border-bottom" style="padding-top: 100px;">
 		<div class="gtco-container">
-			<div class="row">
+			<div class="row" ng-controller="ListGateway">
 
 				<div class="col-lg-4 col-md-4 col-sm-6">
 					<a data-toggle="modal" data-target="#myModal" class="fh5co-project-item">
 						<figure style="height: 300px;">
-							<!-- <div class="overlay"><i class="ti-plus"></i></div> -->
 							<img src="images/add-button-1.png" alt="Image" class="img-responsive">
 						</figure>
 						<div class="fh5co-text">
@@ -220,19 +172,18 @@
 					</a>
 				</div>
 
-				<div class="col-lg-4 col-md-4 col-sm-6">
+				<div class="col-lg-4 col-md-4 col-sm-6" ng-repeat="gw in gateways">
 					<div href="node.html" class="fh5co-project-item">
 						<figure style="height: 300px;">
-							<a href="node.html">
+							<a href="/nodes?gw={{gw.G_MAC}}">
 								<img src="images/gateway.jpg" alt="Image" class="img-responsive">
 							</a>
 						</figure>
 						<div class="fh5co-text">
-							<h2>Gateway 1</h2>
-							<p>10 devices</p>
+							<h2>{{gw.name}}</h2>
 							<div>
-								<input data-toggle="modal" data-target="#editModal" type="image" src="images/edit.png" alt="Submit" width="40" height="40" style="float: left; margin-left: 10px; padding: 5px;">
-								<input data-toggle="modal" data-target="#deleteModal" type="image" src="images/delete.png" alt="Submit" width="40" height="40" style="float: right; margin-right: 10px; padding: 5px;">
+								<input data-toggle="modal" data-target="#editModal" ng-click="editGateway(gw)" type="image" src="images/edit.png" alt="Submit" width="40" height="40" style="float: left; margin-left: 10px; padding: 5px;">
+								<input data-toggle="modal" data-target="#deleteModal" ng-click="deleteGateway(gw)" type="image" src="images/delete.png" alt="Submit" width="40" height="40" style="float: right; margin-right: 10px; padding: 5px;">
 							</div>
 						</div>
 					</div>
@@ -310,24 +261,7 @@
 		<a href="#" class="js-gotop"><i class="icon-arrow-up"></i></a>
 	</div>
 
-	<!-- jQuery -->
-	<script src="js/jquery.min.js"></script>
-	<!-- jQuery Easing -->
-	<script src="js/jquery.easing.1.3.js"></script>
-	<!-- Bootstrap -->
-	<script src="js/bootstrap.min.js"></script>
-	<!-- Waypoints -->
-	<script src="js/jquery.waypoints.min.js"></script>
-	<!-- Carousel -->
-	<script src="js/owl.carousel.min.js"></script>
-	<!-- countTo -->
-	<script src="js/jquery.countTo.js"></script>
-	<!-- Magnific Popup -->
-	<script src="js/jquery.magnific-popup.min.js"></script>
-	<script src="js/magnific-popup-options.js"></script>
-	<!-- Main -->
-	<script src="js/main.js"></script>
+
 
 	</body>
 </html>
-
