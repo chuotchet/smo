@@ -123,12 +123,12 @@ myApp.controller('ListNode',function($http,$scope,$rootScope){
     $rootScope.nodes = result.data.data.nodes;
   });
 
-  // $scope.editGateway = function(gw){
-  //   $rootScope.gwEdit = gw;
-  // }
-  // $scope.deleteGateway = function(gw){
-  //   $rootScope.gwDelete = gw;
-  // }
+  $scope.editNode = function(node){
+    $rootScope.nodeEdit = node;
+  }
+  $scope.deleteNode = function(node){
+    $rootScope.nodeDelete = node;
+  }
 });
 
 myApp.controller('AddNode',function($http,$scope,$rootScope){
@@ -139,37 +139,27 @@ myApp.controller('AddNode',function($http,$scope,$rootScope){
   }
   $scope.addNode = function(){
     $scope.node.G_MAC = $rootScope.curGw.G_MAC;
-    console.log('addNode');
-    console.log($scope.node);
     $http.post('/users/addnode',$scope.node).then(function(result){
       $rootScope.nodes = result.data.data.nodes;
     });
   }
 });
 
-myApp.controller('Node',function($http,$scope,$rootScope){
-  $scope.nodes = [];
-  $http.post('/users/getnodes').then(function(result){
-    console.log(result.data);
-    $scope.nodes = result.data.data.nodes;
-  });
+myApp.controller('EditNode',function($http,$scope,$rootScope){
+  $scope.editNode = function(){
+    $scope.nodeEdit.G_MAC = $rootScope.curGw.G_MAC;
+    $http.post('/users/editnode',$scope.nodeEdit).then(function(result){
+      $rootScope.nodes = result.data.data.nodes;
+    });
+  }
+});
 
-  $scope.addGateway = function(node){
-    $http.post('/users/addnode',node).then(function(result){
-      console.log(result.data);
-      $scope.nodes = result.data.data.nodes;
-    });
-  }
-  $scope.editGateway = function(node){
-    $http.post('/users/editnode',node).then(function(result){
-      console.log(result.data);
-      $scope.nodes = result.data.data.nodes;
-    });
-  }
-  $scope.deleteGateway = function(node){
-    $http.post('/users/deletenode',node).then(function(result){
-      console.log(result.data);
-      $scope.nodes = result.data.data.nodes;
+myApp.controller('DeleteNode',function($http,$scope,$rootScope){
+  $scope.deleteNode = function(){
+    $scope.nodeDelete.G_MAC = $rootScope.curGw.G_MAC;
+    $http.post('/users/deletenode',$scope.nodeDelete).then(function(result){
+      $rootScope.nodes = result.data.data.nodes;
+      location.reload();
     });
   }
 });

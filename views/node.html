@@ -51,7 +51,7 @@
   	</div>
 
   <!-- Modal Change name-->
-	<div class="modal fade" id="editModal" role="dialog">
+	<div class="modal fade" id="editModal" role="dialog"  ng-controller="EditNode">
 	    <div class="modal-dialog modal-sm">
 	      <!-- Modal content-->
 	      	<div class="modal-content">
@@ -68,13 +68,13 @@
 		          			<center>
 		          				<label for="pwd">New Name:</label>
 		          			</center>
-				    		<input type="text" class="form-control" id="pwd" style="text-align: center;">
+				    		<input type="text" class="form-control" id="pwd" ng-model="nodeEdit.name" style="text-align: center;">
 				  		</div>
 					</form>
 		        </div>
 		        <div class="modal-footer">
 		        	<center>
-		        		<button type="button" class="btn btn-danger" data-dismiss="modal">Change</button>
+		        		<button type="button" class="btn btn-danger" data-dismiss="modal" ng-click="editNode()">Change</button>
 		        	</center>
 
 		        </div>
@@ -84,7 +84,7 @@
  	</div>
 
  	<!-- Modal Delete-->
-  	<div class="modal fade" id="deleteModal" role="dialog">
+  	<div class="modal fade" id="deleteModal" role="dialog" ng-controller="DeleteNode">
     	<div class="modal-dialog modal-sm">
       		<div class="modal-content">
         		<div class="modal-header">
@@ -96,7 +96,7 @@
        			</div>
         		<div class="modal-footer">
           			<button type="button" class="btn btn-success" data-dismiss="modal" style="float: left;">Cancel</button>
-          			<button type="button" class="btn btn-danger" data-dismiss="modal" style="float: right;">Delete</button>
+          			<button type="button" class="btn btn-danger" data-dismiss="modal" ng-click="deleteNode()" style="float: right;">Delete</button>
         		</div>
       		</div>
    		</div>
@@ -179,15 +179,15 @@
 				<div class="col-lg-4 col-md-4 col-sm-6" ng-repeat="node in nodes">
 					<div class="fh5co-project-item">
 						<figure style="height: 300px;">
-							<a href="devices.html">
+							<a href="/devices?node={{node.N_MAC}}">
 								<img src="images/home.png" alt="Image" class="img-responsive">
 							</a>
 						</figure>
 						<div class="fh5co-text">
 							<h2>{{node.name}}</h2>
 							<div>
-								<input data-toggle="modal" data-target="#editModal" type="image" src="images/edit.png" alt="Submit" width="40" height="40" style="float: left; margin-left: 10px; padding: 5px;">
-								<input data-toggle="modal" data-target="#deleteModal" type="image" src="images/delete.png" alt="Submit" width="40" height="40" style="float: right; margin-right: 10px; padding: 5px;">
+								<input data-toggle="modal" data-target="#editModal" ng-click="editNode(node)" type="image" src="images/edit.png" alt="Submit" width="40" height="40" style="float: left; margin-left: 10px; padding: 5px;">
+								<input data-toggle="modal" data-target="#deleteModal" ng-click="deleteNode(node)" type="image" src="images/delete.png" alt="Submit" width="40" height="40" style="float: right; margin-right: 10px; padding: 5px;">
 							</div>
 						</div>
 					</div>
