@@ -3,59 +3,16 @@
 	<head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>Smart Office - Home</title>
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<meta name="description" content="Free HTML5 Website Template by FreeHTML5.co" />
-	<meta name="keywords" content="free website templates, free html5, free template, free bootstrap, free website template, html5, css3, mobile first, responsive" />
-	<meta name="author" content="FreeHTML5.co" />
-	<meta property="og:title" content=""/>
-	<meta property="og:image" content=""/>
-	<meta property="og:url" content=""/>
-	<meta property="og:site_name" content=""/>
-	<meta property="og:description" content=""/>
-	<meta name="twitter:title" content="" />
-	<meta name="twitter:image" content="" />
-	<meta name="twitter:url" content="" />
-	<meta name="twitter:card" content="" />
+	<title>Smart Office - Device</title>
 
-	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
-
-	<link href="https://fonts.googleapis.com/css?family=Roboto:300,400,700" rel="stylesheet">
-	<!-- <link type="text/css" href="css/bootstrap.min.css" /> -->
 	<link type="text/css" href="css/bootstrap-timepicker.min.css" />
 
-	<script src="js/jquery.min.js"></script>
 	<script src="js/bootstrap-timepicker.js"></script>
-    <script src="js/bootstrap-timepicker.min.js"></script>
-	
-	<!-- Animate.css -->
-	<link rel="stylesheet" href="css/animate.css">
-	<!-- Icomoon Icon Fonts-->
-	<link rel="stylesheet" href="css/icomoon.css">
-	<!-- Themify Icons-->
-	<link rel="stylesheet" href="css/themify-icons.css">
-	<!-- Bootstrap  -->
-	<link rel="stylesheet" href="css/bootstrap.css">
+  <script src="js/bootstrap-timepicker.min.js"></script>
 
-	<!-- Magnific Popup -->
-	<link rel="stylesheet" href="css/magnific-popup.css">
-
-	<!-- Owl Carousel  -->
-	<link rel="stylesheet" href="css/owl.carousel.min.css">
-	<link rel="stylesheet" href="css/owl.theme.default.min.css">
-
-	<!-- Theme style  -->
-	<link rel="stylesheet" href="css/style.css">
-
-	<!-- Modernizr JS -->
-	<script src="js/modernizr-2.6.2.min.js"></script>
-	<!-- FOR IE9 below -->
-	<!--[if lt IE 9]>
-	<script src="js/respond.min.js"></script>
-	<![endif]-->
 
 	</head>
-	<body>
+	<body ng-controller="Device">
 <!-- Modal -->
 	<div class="modal fade" id="changeModal" role="dialog">
 		<div class="modal-dialog">
@@ -106,7 +63,7 @@
   					<center>
   						<button class="btn btn-success" data-dismiss="modal" aria-hidden="true" style="width: 200px;">Save</button>
   					</center>
-    				
+
   				</div>
 			</div>
 		</div>
@@ -126,7 +83,7 @@
        				<center>
        					<input type="number" name="points" step="1" value="10" style="text-align: center;">
        				</center>
-					
+
        			</div>
         		<div class="modal-footer">
           			<center>
@@ -155,7 +112,7 @@
   						</center>
   					</div>
        				<div style="height: 70px">
-       					<div class="col-md-4 col-xs-2" style="float: left;"> 
+       					<div class="col-md-4 col-xs-2" style="float: left;">
        						<img src="images/condition-on.png" style="width: 40px">
        					</div>
 	       				<center>
@@ -164,7 +121,7 @@
 	       				</center>
        				</div>
        				<div style="height: 70px;">
-       					<div class="col-md-4 col-xs-2" style="float: left;"> 
+       					<div class="col-md-4 col-xs-2" style="float: left;">
        						<img src="images/light-on.png" style="width: 40px">
        					</div>
 	       				<center>
@@ -173,7 +130,7 @@
 	       				</center>
        				</div>
        				<div style="height: 70px;">
-       					<div class="col-md-4 col-xs-2" style="float: left;"> 
+       					<div class="col-md-4 col-xs-2" style="float: left;">
        						<img src="images/fan-on.png" style="width: 40px">
        					</div>
 	       				<center>
@@ -286,12 +243,12 @@
       		</div>
    		</div>
   	</div>
-		
+
 	<div class="gtco-loader"></div>
-	
+
 	<div id="page">
 
-	
+
 	<div class="page-inner">
 	<nav class="gtco-nav gateway" role="navigation">
 		<div class="gtco-container">
@@ -324,25 +281,25 @@
 		<center>
 			<div class="col-md-4 col-xs-12" id="tem" style="float: left;">
 				<img class="img-devices" src="images/tem.png" width="200" height="200">
-				<h1 class="h1-info">Tem</h1>
+				<h1 class="h1-info">Tem: {{nodeData.tem}}</h1>
 			</div>
 			<div class="col-md-4 col-xs-12" id="lux" style="float: left;">
 				<img class="img-devices" src="images/lux.png" width="200" height="200">
-				<h1 class="h1-info">Lux</h1>
+				<h1 class="h1-info">Lux: {{nodeData.lux}}</h1>
 			</div>
 			<div class="col-md-4 col-xs-12" id="hum" style="float: left;">
 				<img class="img-devices" src="images/hum.png" width="200" height="200">
-				<h1 class="h1-info">Hum</h1>
+				<h1 class="h1-info">Hum: {{nodeData.hum}}</h1>
 			</div>
 		</center>
 	</div>
-
+	<h1>{{test}}</h1>
 	<div style="margin-top: 50px">
-		<div class="row div-devices-cell" >
+		<div class="row div-devices-cell" ng-repeat="device in nodeData.data.devices">
 			<center>
 				<div class="col-md-4 col-xs-12" id="tem" style="float: left;">
 					<img class="img-devices" src="images/fan-on.png" width="100" height="100" style="float: left; margin-top: 7px;">
-					<h1 class="h1-name-cell">Fan</h1>
+					<h1 class="h1-name-cell">{{devices.name}}</h1>
 				</div>
 				<div class="col-md-8 col-xs-12" style="float: left;">
 					<input class="img-devices-cell" type="image" src="images/status-on.png" alt="Submit" width="100" height="100" style="float: left;margin-left: 10px; margin-top: 5px;">
@@ -352,7 +309,7 @@
 					<input href="#" role="button" data-toggle="modal" class="img-devices-cell-1" type="image" src="images/edit.png" alt="Submit" width="80" height="80" style="float: right;">
 			</center>
 		</div>
-		<div class="row div-devices-cell" >
+		<!-- <div class="row div-devices-cell" >
 			<center>
 				<div class="col-md-4 col-xs-12" id="tem" style="float: left;">
 					<img class="img-devices" src="images/light-on.png" width="100" height="100" style="float: left; margin-top: 7px;">
@@ -381,7 +338,7 @@
 					<input href="#editModal" role="button" data-toggle="modal" class="img-devices-cell-1" type="image" src="images/edit.png" alt="Submit" width="80" height="80" style="float: right;">
 				</div>
 			</center>
-		</div>
+		</div> -->
 
 		<!-- Auto cell -->
 
@@ -409,7 +366,7 @@
 								     return false;
 								   }
 								}
-								if (detectmob() == true) { 
+								if (detectmob() == true) {
 									var html = [
 											   	'<img class="img-devices-cell-3" src="images/hum.png">',
 											   	'<h4 style="float: left;padding-top:5px;">1800</h4>'
@@ -424,7 +381,7 @@
 									document.getElementById('div-tem').innerHTML += html;
 								}
 							</script>
-							
+
 						</div>
 						<div id="div-clock" class="col-md-4 col-xs-5" style="float: left;">
 							<script type="text/javascript">
@@ -435,7 +392,7 @@
 								     return false;
 								   }
 								}
-								if (detectmob() == true) { 
+								if (detectmob() == true) {
 									var html1 = [
 											   	'<img class="img-devices-cell-2" src="images/clock.png">',
 											   	'<h4 style="float: left;padding-top:5px;">07h30-18h00</h4>'
@@ -460,7 +417,7 @@
 								     return false;
 								   }
 								}
-								if (detectmob() == true) { 
+								if (detectmob() == true) {
 									var html1 = [
 											   	'<img class="img-devices-cell-5" src="images/limit.png">',
 											   	'<h4 style="float: left;padding-top:5px;">1800-2000</h4>'
@@ -559,23 +516,6 @@
 		<a href="#" class="js-gotop"><i class="icon-arrow-up"></i></a>
 	</div>
 
-	<!-- jQuery -->
-	<!-- jQuery Easing -->
-	<script src="js/jquery.easing.1.3.js"></script>
-	<!-- Bootstrap -->
-	<script src="js/bootstrap.min.js"></script>
-	<!-- Waypoints -->
-	<script src="js/jquery.waypoints.min.js"></script>
-	<!-- Carousel -->
-	<script src="js/owl.carousel.min.js"></script>
-	<!-- countTo -->
-	<script src="js/jquery.countTo.js"></script>
-	<!-- Magnific Popup -->
-	<script src="js/jquery.magnific-popup.min.js"></script>
-	<script src="js/magnific-popup-options.js"></script>
-	<!-- Main -->
-	<script src="js/main.js"></script>
 
 	</body>
 </html>
-

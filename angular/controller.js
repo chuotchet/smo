@@ -164,15 +164,24 @@ myApp.controller('DeleteNode',function($http,$scope,$rootScope){
   }
 });
 
-myApp.controller('MQTTCtrl', function($http,$scope){
+myApp.controller('Device', function($http,$scope,$rootScope,$location){
+  $scope.nodeData = {};
+  var a = ((window.location.href).split('?')).pop();
+  a = a.split('&');
+  var topic = a[0].split('=').pop()+'/'+a[1].split('=').pop();
   var client = new Paho.MQTT.Client('test.mosquitto.org', Number(8080), 'smoiotlab');
   client.onMessageArrived = function(message){
-    console.log(message.payloadString);
+    // var data = JSON.parse(message.payloadString);
+    // if(data.success){
+    //   $scope.nodeData = data;
+    //   console.log($scope.nodeData);
+    // }
+    $scope.test = message.payloadString;
   }
   client.connect({
     onSuccess: function(){
       console.log("onConnect");
-      client.subscribe("ahihi");
+      client.subscribe(topic+'/g');
     }
   });
 });

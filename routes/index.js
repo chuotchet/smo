@@ -22,7 +22,7 @@ router.get('/', function(req, res, next) {
 });
 
 router.get('/test',authenticate(), function(req, res, next) {
-  res.send('test');
+  res.render('test');
 });
 
 router.get('/gateways',authenticate(), function(req, res, next) {
@@ -34,7 +34,7 @@ router.get('/nodes',authenticate(), function(req, res, next) {
 });
 
 router.get('/devices',authenticate(), function(req, res, next) {
-  res.render('device');
+  res.render('devices');
 });
 
 router.get('/guide', function(req, res, next) {
