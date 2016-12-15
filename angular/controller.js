@@ -165,23 +165,32 @@ myApp.controller('DeleteNode',function($http,$scope,$rootScope){
 });
 
 myApp.controller('Device', function($http,$scope,$rootScope,$location){
+  // var processData = function(msg){
+  //   $scope.nodeData = msg;
+  //   for(i=0;i<$scope.nodeData.length;i++){
+  //     if($scope.nodeData.data.devices[i].status=='on'){
+  //       $scope.nodeData.data.devices[i].sttImg = ''
+  //     }
+  //   }
+  // }
   $scope.nodeData = {};
   var a = ((window.location.href).split('?')).pop();
   a = a.split('&');
   var topic = a[0].split('=').pop()+'/'+a[1].split('=').pop();
   var client = new Paho.MQTT.Client('test.mosquitto.org', Number(8080), 'smoiotlab');
   client.onMessageArrived = function(message){
-    // var data = JSON.parse(message.payloadString);
-    // if(data.success){
-    //   $scope.nodeData = data;
-    //   console.log($scope.nodeData);
-    // }
-    $scope.test = message.payloadString;
+    var data = JSON.parse(message.payloadString);
+    if(data.success){
+      $scope.nodeData = data;
+      // $scope.$apply(processData(data));
+    }
+    $scope.$apply();
   }
   client.connect({
     onSuccess: function(){
       console.log("onConnect");
       client.subscribe(topic+'/g');
+      client.publish();// request get data
     }
   });
 });
