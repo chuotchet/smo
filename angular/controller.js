@@ -176,21 +176,122 @@ myApp.controller('Device', function($http,$scope,$rootScope,$location){
   $scope.nodeData = {};
   var a = ((window.location.href).split('?')).pop();
   a = a.split('&');
-  var topic = a[0].split('=').pop()+'/'+a[1].split('=').pop();
+  $scope.topic = a[0].split('=').pop()+'/'+a[1].split('=').pop();
   var client = new Paho.MQTT.Client('test.mosquitto.org', Number(8080), 'smoiotlab');
   client.onMessageArrived = function(message){
+    console.log('onMessageArrived');
     var data = JSON.parse(message.payloadString);
     if(data.success){
       $scope.nodeData = data;
-      // $scope.$apply(processData(data));
     }
     $scope.$apply();
   }
   client.connect({
     onSuccess: function(){
       console.log("onConnect");
-      client.subscribe(topic+'/g');
-      client.publish();// request get data
+      client.subscribe($scope.topic+'/g');
+      var dataSend = {
+        request: 'getData'
+      }
+      var message = new Paho.MQTT.Message(JSON.stringify(dataSend));
+      message.destinationName = $scope.topic;
+      client.send(message);
     }
   });
+  $scope.control = function(device){
+    var dataSend = {
+      request: 'controlDevice',
+      data: {
+        port: device.port,
+        status: (device.status=='on')?'off':'on'
+      }
+    }
+    var message = new Paho.MQTT.Message(JSON.stringify(dataSend));
+    message.destinationName = $scope.topic;
+    client.send(message);
+  }
+  $scope.changeMode = function(device){
+    var dataSend = {
+      request: 'changeMode',
+      data: {
+        port: device.port,
+        mode: (device.mode=='manual')?'auto':'manual'
+      }
+    }
+    var message = new Paho.MQTT.Message(JSON.stringify(dataSend));
+    message.destinationName = $scope.topic;
+    client.send(message);
+  }
+  $scope.addDevice = function(device){
+    var dataSend = {
+      request: 'addDevice',
+      data: {
+        port: device.port,
+        type: device.type,
+        name: device.name,
+        button: device.button
+      }
+    }
+    var message = new Paho.MQTT.Message(JSON.stringify(dataSend));
+    message.destinationName = $scope.topic;
+    client.send(message);
+  }
+  $scope.editDevice = function(device){
+    var dataSend = {
+      request: 'editDevice',
+      data: {
+        port: device.port,
+        type: device.type,
+        name: device.name,
+        button: device.button
+      }
+    }
+    var message = new Paho.MQTT.Message(JSON.stringify(dataSend));
+    message.destinationName = $scope.topic;
+    client.send(message);
+  }
+  $scope.deleteDevice = function(device){
+    var dataSend = {
+      request: 'deleteDevice',
+      data: {
+        port: device.port
+      }
+    }
+    var message = new Paho.MQTT.Message(JSON.stringify(dataSend));
+    message.destinationName = $scope.topic;
+    client.send(message);
+  }
+  $scope.turnOffAll = function(){
+    var dataSend = {
+      request: 'turnOffAll'
+    }
+    var message = new Paho.MQTT.Message(JSON.stringify(dataSend));
+    message.destinationName = $scope.topic;
+    client.send(message);
+  }
+  $scope.controlAir = function(device){
+    var dataSend = {
+      request: 'controlAir',
+      data: {
+        port: device.port,
+        temp: device.temp
+      }
+    }
+    var message = new Paho.MQTT.Message(JSON.stringify(dataSend));
+    message.destinationName = $scope.topic;
+    client.send(message);
+  }
+  $scope.controlAuto = function(device){
+    var dataSend = {
+      request: 'controlAuto',
+      data: {
+        port: device.port,
+        time: device.time
+      }
+    }
+    var message = new Paho.MQTT.Message(JSON.stringify(dataSend));
+    message.destinationName = $scope.topic;
+    client.send(message);
+  }
+
 });

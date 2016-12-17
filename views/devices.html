@@ -117,7 +117,7 @@
        					</div>
 	       				<center>
 	       					<h2 class="col-xs-8 col-md-4">CONDITION</h2>
-	       					<input type="radio" name="condition-type">
+	       					<input type="radio" ng-model="device.type" value="condition">
 	       				</center>
        				</div>
        				<div style="height: 70px;">
@@ -126,7 +126,7 @@
        					</div>
 	       				<center>
 	       					<h2 class="col-xs-8 col-md-4">LIGHT</h2>
-	       					<input type="radio" name="light-type">
+	       					<input type="radio" ng-model="device.type" value="light">
 	       				</center>
        				</div>
        				<div style="height: 70px;">
@@ -135,7 +135,7 @@
        					</div>
 	       				<center>
 	       					<h2 class="col-xs-8 col-md-4">FAN</h2>
-	       					<input type="radio" name="fan-type">
+	       					<input type="radio" ng-model="device.type" value="fan">
 	       				</center>
        				</div>
        				<div>
@@ -155,49 +155,49 @@
 	  					<div class="col-md-3 col-xs-3">
 	  						<center>
 	  							<h4 style="float: left;">1</h4>
-	  							<input type="radio" name="btn1">
+	  							<input type="radio" ng-model="device.button" value="1">
 	  						</center>
 	  					</div>
 	  					<div class="col-md-3 col-xs-3" style="float: left;">
 	  						<center>
 	  							<h4 style="float: left;">2</h4>
-	  							<input type="radio" name="btn2">
+	  							<input type="radio" ng-model="device.button" value="2">
 	  						</center>
 	  					</div>
 	  					<div class="col-md-3 col-xs-3" style="float: left;">
 	  						<center>
 	  							<h4 style="float: left;">3</h4>
-	  							<input type="radio" name="btn3">
+	  							<input type="radio" ng-model="device.button" value="3">
 	  						</center>
 	  					</div>
 	  					<div class="col-md-3 col-xs-3" style="float: left;">
 	  						<center>
 	  							<h4 style="float: left;">4</h4>
-	  							<input type="radio" name="btn4">
+	  							<input type="radio" ng-model="device.button" value="4">
 	  						</center>
 	  					</div>
 	  					<div class="col-md-3 col-xs-3">
 	  						<center>
 	  							<h4 style="float: left;">5</h4>
-	  							<input type="radio" name="btn5">
+	  							<input type="radio" ng-model="device.button" value="5">
 	  						</center>
 	  					</div>
 	  					<div class="col-md-3 col-xs-3" style="float: left;">
 	  						<center>
 	  							<h4 style="float: left;">6</h4>
-	  							<input type="radio" name="btn6">
+	  							<input type="radio" ng-model="device.button" value="6">
 	  						</center>
 	  					</div>
 	  					<div class="col-md-3 col-xs-3" style="float: left;">
 	  						<center>
 	  							<h4 style="float: left;">7</h4>
-	  							<input type="radio" name="btn7">
+	  							<input type="radio" ng-model="device.button" value="7">
 	  						</center>
 	  					</div>
 	  					<div class="col-md-3 col-xs-3" style="float: left;">
 	  						<center>
 	  							<h4 style="float: left;">8</h4>
-	  							<input type="radio" name="btn8">
+	  							<input type="radio" ng-model="device.button" value="8">
 	  						</center>
 	  					</div>
 	  				</div>
@@ -309,40 +309,10 @@
 					<img href="#" role="button" data-toggle="modal" class="img-devices-cell-1" type="image" src="images/edit.png" alt="Submit" width="80" height="80" style="float: right;">
 			</center>
 		</div>
-		<!-- <div class="row div-devices-cell" >
-			<center>
-				<div class="col-md-4 col-xs-12" id="tem" style="float: left;">
-					<img class="img-devices" src="images/light-on.png" width="100" height="100" style="float: left; margin-top: 7px;">
-					<h1 class="h1-name-cell">Light</h1>
-				</div>
-				<div class="col-md-8 col-xs-12" style="float: left;">
-					<input class="img-devices-cell" type="image" src="images/status-on.png" alt="Submit" width="100" height="100" style="float: left;margin-left: 10px; margin-top: 5px;">
-					<input class="img-devices-cell" type="image" src="images/mode-manual.png" alt="Submit" width="100" height="100" style="margin-right: 100px; margin-top: 5px;">
-					<input href="#editDeviceModal" role="button" data-toggle="modal" class="img-devices-cell-1" type="image" src="images/setting.png" alt="Submit" width="80" height="80" style="">
-					<input class="img-devices-cell-1" type="image" src="images/delete.png" alt="Submit" width="80" height="80" style="float: right;margin-left: 10px; margin-top: 5px;">
-					<input href="#" role="button" data-toggle="modal" class="img-devices-cell-1" type="image" src="images/edit.png" alt="Submit" width="80" height="80" style="float: right;">
-				</div>
-			</center>
-		</div>
-		<div class="row div-devices-cell" >
-			<center>
-				<div class="col-md-4 col-xs-12" id="tem" style="float: left;">
-					<img class="img-devices" src="images/condition-off.png" width="100" height="100" style="float: left; margin-top: 7px;">
-					<h1 class="h1-name-cell">Condition</h1>
-				</div>
-				<div class="col-md-8 col-xs-12" style="float: left;">
-					<input class="img-devices-cell" type="image" src="images/status-on.png" alt="Submit" width="100" height="100" style="float: left;margin-left: 10px; margin-top: 5px;">
-					<input class="img-devices-cell" type="image" src="images/mode-manual.png" alt="Submit" width="100" height="100" style="margin-right: 100px; margin-top: 5px;">
-					<input href="#editDeviceModal" role="button" data-toggle="modal" class="img-devices-cell-1" type="image" src="images/setting.png" alt="Submit" width="80" height="80" style="">
-					<input class="img-devices-cell-1" type="image" src="images/delete.png" alt="Submit" width="80" height="80" style="float: right;margin-left: 10px; margin-top: 5px;">
-					<input href="#editModal" role="button" data-toggle="modal" class="img-devices-cell-1" type="image" src="images/edit.png" alt="Submit" width="80" height="80" style="float: right;">
-				</div>
-			</center>
-		</div> -->
 
 		<!-- Auto cell -->
 
-		<div class="row div-devices-cell" >
+		<!-- <div class="row div-devices-cell" >
 			<center>
 				<div class="col-md-4 col-xs-12" id="tem" style="float: left;">
 					<img class="img-devices" src="images/condition-off.png" width="100" height="100" style="float: left; margin-top: 7px;">
@@ -436,7 +406,7 @@
 					</div>
 				</div>
 			</center>
-		</div>
+		</div> -->
 
 		<!-- Setting cell -->
 		<div class="row div-devices-cell" >
