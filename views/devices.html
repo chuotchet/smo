@@ -30,7 +30,7 @@
   						</center>
   					</div>
   					<div>
-  						<input type="text" class="form-control" id="min" style="text-align: center;">
+  						<input type="text" ng-model="autoValue.min" class="form-control" id="min" style="text-align: center;">
   					</div>
   					<div style="margin-top: 20px;">
   						<center>
@@ -38,7 +38,7 @@
   						</center>
   					</div>
   					<div>
-  						<input type="text" class="form-control" id="max" style="text-align: center;">
+  						<input type="text" ng-model="autoValue.max" class="form-control" id="max" style="text-align: center;">
   					</div>
   					<div style="margin-top: 20px;">
   						<center>
@@ -46,7 +46,7 @@
   						</center>
   					</div>
     				<div class="input-group bootstrap-timepicker timepicker">
-            			<input id="timeStart" type="time" class="form-control input-small" style="text-align: center;">
+            			<input id="timeStart" type="time" ng-model="autoValue.timeStart" class="form-control input-small" style="text-align: center;">
             			<span class="input-group-addon"><i class="glyphicon glyphicon-time"></i></span>
        				</div>
        				<div style="margin-top: 20px;">
@@ -55,7 +55,7 @@
   						</center>
   					</div>
        				<div class="input-group bootstrap-timepicker timepicker">
-            			<input id="timeEnd" type="time" class="form-control input-small" style="text-align: center;">
+            			<input id="timeEnd" type="time" ng-model="autoValue.timeEnd" class="form-control input-small" style="text-align: center;">
             			<span class="input-group-addon"><i class="glyphicon glyphicon-time"></i></span>
        				</div>
   			</div>
@@ -76,12 +76,12 @@
         		<div class="modal-header">
           			<button type="button" class="close" data-dismiss="modal">&times;</button>
           			<center>
-          				<h4 class="modal-title">Do you want edit ?</h4>
+          				<h4 class="modal-title">Change temperature</h4>
           			</center>
        			</div>
        			<div class="modal-body">
        				<center>
-       					<input type="number" name="points" step="1" value="10" style="text-align: center;">
+       					<input type="number" ng-model="temValue.tem" name="points" step="1" value="10" style="text-align: center;">
        				</center>
 
        			</div>
@@ -117,7 +117,7 @@
        					</div>
 	       				<center>
 	       					<h2 class="col-xs-8 col-md-4">CONDITION</h2>
-	       					<input type="radio" ng-model="device.type" value="condition">
+	       					<input type="radio" ng-model="deviceEdit.type" value="condition">
 	       				</center>
        				</div>
        				<div style="height: 70px;">
@@ -126,7 +126,7 @@
        					</div>
 	       				<center>
 	       					<h2 class="col-xs-8 col-md-4">LIGHT</h2>
-	       					<input type="radio" ng-model="device.type" value="light">
+	       					<input type="radio" ng-model="deviceEdit.type" value="light">
 	       				</center>
        				</div>
        				<div style="height: 70px;">
@@ -135,7 +135,7 @@
        					</div>
 	       				<center>
 	       					<h2 class="col-xs-8 col-md-4">FAN</h2>
-	       					<input type="radio" ng-model="device.type" value="fan">
+	       					<input type="radio" ng-model="deviceEdit.type" value="fan">
 	       				</center>
        				</div>
        				<div>
@@ -144,7 +144,7 @@
 	  					</center>
 	  				</div>
 	  				<div>
-	  					<input type="text" class="form-control" id="name" style="text-align: center;">
+	  					<input type="text"  ng-model="deviceEdit.name" class="form-control" id="name" style="text-align: center;">
 	  				</div>
 	  				<div style="margin-top: 20px;">
 	  					<center>
@@ -155,49 +155,49 @@
 	  					<div class="col-md-3 col-xs-3">
 	  						<center>
 	  							<h4 style="float: left;">1</h4>
-	  							<input type="radio" ng-model="device.button" value="1">
+	  							<input type="radio" ng-model="deviceEdit.button" value="1">
 	  						</center>
 	  					</div>
 	  					<div class="col-md-3 col-xs-3" style="float: left;">
 	  						<center>
 	  							<h4 style="float: left;">2</h4>
-	  							<input type="radio" ng-model="device.button" value="2">
+	  							<input type="radio" ng-model="deviceEdit.button" value="2">
 	  						</center>
 	  					</div>
 	  					<div class="col-md-3 col-xs-3" style="float: left;">
 	  						<center>
 	  							<h4 style="float: left;">3</h4>
-	  							<input type="radio" ng-model="device.button" value="3">
+	  							<input type="radio" ng-model="deviceEdit.button" value="3">
 	  						</center>
 	  					</div>
 	  					<div class="col-md-3 col-xs-3" style="float: left;">
 	  						<center>
 	  							<h4 style="float: left;">4</h4>
-	  							<input type="radio" ng-model="device.button" value="4">
+	  							<input type="radio" ng-model="deviceEdit.button" value="4">
 	  						</center>
 	  					</div>
 	  					<div class="col-md-3 col-xs-3">
 	  						<center>
 	  							<h4 style="float: left;">5</h4>
-	  							<input type="radio" ng-model="device.button" value="5">
+	  							<input type="radio" ng-model="deviceEdit.button" value="5">
 	  						</center>
 	  					</div>
 	  					<div class="col-md-3 col-xs-3" style="float: left;">
 	  						<center>
 	  							<h4 style="float: left;">6</h4>
-	  							<input type="radio" ng-model="device.button" value="6">
+	  							<input type="radio" ng-model="deviceEdit.button" value="6">
 	  						</center>
 	  					</div>
 	  					<div class="col-md-3 col-xs-3" style="float: left;">
 	  						<center>
 	  							<h4 style="float: left;">7</h4>
-	  							<input type="radio" ng-model="device.button" value="7">
+	  							<input type="radio" ng-model="deviceEdit.button" value="7">
 	  						</center>
 	  					</div>
 	  					<div class="col-md-3 col-xs-3" style="float: left;">
 	  						<center>
 	  							<h4 style="float: left;">8</h4>
-	  							<input type="radio" ng-model="device.button" value="8">
+	  							<input type="radio" ng-model="deviceEdit.button" value="8">
 	  						</center>
 	  					</div>
 	  				</div>
@@ -205,12 +205,185 @@
 
         		<div class="modal-footer">
           			<center>
-  						<button class="btn btn-danger" data-dismiss="modal" aria-hidden="true" style="width: 200px;">Submit</button>
+  						<button class="btn btn-danger" data-dismiss="modal" ng-click="edit()" aria-hidden="true" style="width: 200px;">Submit</button>
   					</center>
         		</div>
       		</div>
       	</div>
     </div>
+
+		<!-- Modal Add Devices-->
+
+			<div class="modal fade" id="addDeviceModal" role="dialog">
+		    	<div class="modal-dialog">
+		      		<div class="modal-content">
+		      			<div class="modal-header">
+		          			<button type="button" class="close" data-dismiss="modal">&times;</button>
+		          			<center>
+		          				<h4 class="modal-title">Add device</h4>
+		          			</center>
+		       			</div>
+		       			<div class="modal-body">
+		       				<div style="margin-top: 10px;">
+		  						<center>
+		  							<h3 style="color: green">Assign type of device</h3>
+		  						</center>
+		  					</div>
+		       				<div style="height: 70px">
+		       					<div class="col-md-4 col-xs-2" style="float: left;">
+		       						<img src="images/condition-on.png" style="width: 40px">
+		       					</div>
+			       				<center>
+			       					<h2 class="col-xs-8 col-md-4">CONDITION</h2>
+			       					<input type="radio" ng-model="deviceAdd.type" value="condition">
+			       				</center>
+		       				</div>
+		       				<div style="height: 70px;">
+		       					<div class="col-md-4 col-xs-2" style="float: left;">
+		       						<img src="images/light-on.png" style="width: 40px">
+		       					</div>
+			       				<center>
+			       					<h2 class="col-xs-8 col-md-4">LIGHT</h2>
+			       					<input type="radio" ng-model="deviceAdd.type" value="light">
+			       				</center>
+		       				</div>
+		       				<div style="height: 70px;">
+		       					<div class="col-md-4 col-xs-2" style="float: left;">
+		       						<img src="images/fan-on.png" style="width: 40px">
+		       					</div>
+			       				<center>
+			       					<h2 class="col-xs-8 col-md-4">FAN</h2>
+			       					<input type="radio" ng-model="deviceAdd.type" value="fan">
+			       				</center>
+		       				</div>
+		       				<div>
+			  					<center>
+			  						<h3 style="color: green">Set name for device</h3>
+			  					</center>
+			  				</div>
+			  				<div>
+			  					<input type="text"  ng-model="deviceAdd.name" class="form-control" id="name" style="text-align: center;">
+			  				</div>
+								<div style="margin-top: 20px;">
+			  					<center>
+			  						<h3 style="color: green">Set port for device</h3>
+			  					</center>
+			  				</div>
+			  				<div style="height: 60px">
+			  					<div class="col-md-3 col-xs-3">
+			  						<center>
+			  							<h4 style="float: left;">1</h4>
+			  							<input type="radio" ng-model="deviceAdd.port" value="1">
+			  						</center>
+			  					</div>
+			  					<div class="col-md-3 col-xs-3" style="float: left;">
+			  						<center>
+			  							<h4 style="float: left;">2</h4>
+			  							<input type="radio" ng-model="deviceAdd.port" value="2">
+			  						</center>
+			  					</div>
+			  					<div class="col-md-3 col-xs-3" style="float: left;">
+			  						<center>
+			  							<h4 style="float: left;">3</h4>
+			  							<input type="radio" ng-model="deviceAdd.port" value="3">
+			  						</center>
+			  					</div>
+			  					<div class="col-md-3 col-xs-3" style="float: left;">
+			  						<center>
+			  							<h4 style="float: left;">4</h4>
+			  							<input type="radio" ng-model="deviceAdd.port" value="4">
+			  						</center>
+			  					</div>
+			  					<div class="col-md-3 col-xs-3">
+			  						<center>
+			  							<h4 style="float: left;">5</h4>
+			  							<input type="radio" ng-model="deviceAdd.port" value="5">
+			  						</center>
+			  					</div>
+			  					<div class="col-md-3 col-xs-3" style="float: left;">
+			  						<center>
+			  							<h4 style="float: left;">6</h4>
+			  							<input type="radio" ng-model="deviceAdd.port" value="6">
+			  						</center>
+			  					</div>
+			  					<div class="col-md-3 col-xs-3" style="float: left;">
+			  						<center>
+			  							<h4 style="float: left;">7</h4>
+			  							<input type="radio" ng-model="deviceAdd.port" value="7">
+			  						</center>
+			  					</div>
+			  					<div class="col-md-3 col-xs-3" style="float: left;">
+			  						<center>
+			  							<h4 style="float: left;">8</h4>
+			  							<input type="radio" ng-model="deviceAdd.port" value="8">
+			  						</center>
+			  					</div>
+			  				</div>
+			  				<div style="margin-top: 20px;">
+			  					<center>
+			  						<h3 style="color: green">Set button for device</h3>
+			  					</center>
+			  				</div>
+			  				<div style="height: 60px">
+			  					<div class="col-md-3 col-xs-3">
+			  						<center>
+			  							<h4 style="float: left;">1</h4>
+			  							<input type="radio" ng-model="deviceAdd.button" value="1">
+			  						</center>
+			  					</div>
+			  					<div class="col-md-3 col-xs-3" style="float: left;">
+			  						<center>
+			  							<h4 style="float: left;">2</h4>
+			  							<input type="radio" ng-model="deviceAdd.button" value="2">
+			  						</center>
+			  					</div>
+			  					<div class="col-md-3 col-xs-3" style="float: left;">
+			  						<center>
+			  							<h4 style="float: left;">3</h4>
+			  							<input type="radio" ng-model="deviceAdd.button" value="3">
+			  						</center>
+			  					</div>
+			  					<div class="col-md-3 col-xs-3" style="float: left;">
+			  						<center>
+			  							<h4 style="float: left;">4</h4>
+			  							<input type="radio" ng-model="deviceAdd.button" value="4">
+			  						</center>
+			  					</div>
+			  					<div class="col-md-3 col-xs-3">
+			  						<center>
+			  							<h4 style="float: left;">5</h4>
+			  							<input type="radio" ng-model="deviceAdd.button" value="5">
+			  						</center>
+			  					</div>
+			  					<div class="col-md-3 col-xs-3" style="float: left;">
+			  						<center>
+			  							<h4 style="float: left;">6</h4>
+			  							<input type="radio" ng-model="deviceAdd.button" value="6">
+			  						</center>
+			  					</div>
+			  					<div class="col-md-3 col-xs-3" style="float: left;">
+			  						<center>
+			  							<h4 style="float: left;">7</h4>
+			  							<input type="radio" ng-model="deviceAdd.button" value="7">
+			  						</center>
+			  					</div>
+			  					<div class="col-md-3 col-xs-3" style="float: left;">
+			  						<center>
+			  							<h4 style="float: left;">8</h4>
+			  							<input type="radio" ng-model="deviceAdd.button" value="8">
+			  						</center>
+			  					</div>
+			  				</div>
+		       			</div>
+
+		        		<div class="modal-footer">
+		          			<center>
+		  						<button class="btn btn-danger" data-dismiss="modal" ng-click="addDevice()" aria-hidden="true" style="width: 200px;">Submit</button>
+		  					</center>
+		        		</div>
+		      		</div>
+		      	</div>
+		    </div>
 
     <!-- Modal Profile-->
   	<div class="modal fade" id="profileModal" role="dialog">
@@ -293,7 +466,7 @@
 			</div>
 		</center>
 	</div>
-
+	<button data-toggle="modal" data-target="#addDeviceModal" type="button" class="btn btn-info">Add new device</button>
 	<div style="margin-top: 50px">
 		<div class="row div-devices-cell" ng-repeat="device in nodeData.data.devices">
 			<center>
@@ -302,11 +475,13 @@
 					<h1 class="h1-name-cell">{{device.name}}</h1>
 				</div>
 				<div class="col-md-8 col-xs-12" style="float: left;">
-					<img class="img-devices-cell" type="image" ng-src="images/{{device.status}}/status.png" ng-click="control(device)" width="100" height="100" style="float: left;margin-left: 10px; margin-top: 5px;">
-					<img class="img-devices-cell" type="image" src="images/mode-{{device.mode}}.png" ng-click="changeMode(device)" width="100" height="100" style="margin-right: 100px; margin-top: 5px;">
-					<img href="#editDeviceModal" role="button" data-toggle="modal" class="img-devices-cell-1" type="image" src="images/setting.png" alt="Submit" width="80" height="80" style="">
-					<img class="img-devices-cell-1" type="image" src="images/delete.png" alt="Submit" width="80" height="80" style="float: right;margin-left: 10px; margin-top: 5px;">
-					<img href="#" role="button" data-toggle="modal" class="img-devices-cell-1" type="image" src="images/edit.png" alt="Submit" width="80" height="80" style="float: right;">
+					<img href="#" class="img-devices-cell" type="image" ng-src="images/{{device.status}}/status.png" ng-click="control(device)" width="100" height="100" style="float: left;margin-left: 10px; margin-top: 5px;">
+					<img href="#" class="img-devices-cell" type="image" src="images/mode-{{device.mode}}.png" ng-click="changeMode(device)" width="100" height="100" style="margin-right: 100px; margin-top: 5px;">
+					<img ng-if="device.mode=='auto'" href="#changeModal" role="button" data-toggle="modal" ng-click="controlAuto(device)" class="img-devices-cell-1" type="image" src="images/setting-{{device.mode}}.png" alt="Submit" width="80" height="80" style="">
+					<img ng-if="device.type=='condition' && device.mode=='manual'" href="#editModal" role="button" data-toggle="modal" ng-click="controlAir(device)" class="img-devices-cell-1" type="image" src="images/setting-{{device.mode}}.png" alt="Submit" width="80" height="80" style="">
+					<img ng-if="device.mode=='manual'" role="button" class="img-devices-cell-1" type="image" src="images/setting-{{device.mode}}.png" alt="Submit" width="80" height="80" style="">
+					<img class="img-devices-cell-1" type="image" src="images/delete.png" ng-click="deleteDevice(device)" alt="Submit" width="80" height="80" style="float: right;margin-left: 10px; margin-top: 5px;">
+					<img href="#editDeviceModal" role="button" data-toggle="modal" ng-click="editDevice(device)" class="img-devices-cell-1" type="image" src="images/edit.png" alt="Submit" width="80" height="80" style="float: right;">
 			</center>
 		</div>
 

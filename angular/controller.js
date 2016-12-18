@@ -174,6 +174,12 @@ myApp.controller('Device', function($http,$scope,$rootScope,$location){
   //   }
   // }
   $scope.nodeData = {};
+  $scope.deviceEdit = $scope.deviceAdd = {
+    port: '',
+    type: '',
+    name: '',
+    button: ''
+  }
   var a = ((window.location.href).split('?')).pop();
   a = a.split('&');
   $scope.topic = a[0].split('=').pop()+'/'+a[1].split('=').pop();
@@ -222,14 +228,14 @@ myApp.controller('Device', function($http,$scope,$rootScope,$location){
     message.destinationName = $scope.topic;
     client.send(message);
   }
-  $scope.addDevice = function(device){
+  $scope.addDevice = function(){
     var dataSend = {
       request: 'addDevice',
       data: {
-        port: device.port,
-        type: device.type,
-        name: device.name,
-        button: device.button
+        port: $scope.deviceAdd.port,
+        type: $scope.deviceAdd.type,
+        name: $scope.deviceAdd.name,
+        button: $scope.deviceAdd.button
       }
     }
     var message = new Paho.MQTT.Message(JSON.stringify(dataSend));
@@ -237,13 +243,16 @@ myApp.controller('Device', function($http,$scope,$rootScope,$location){
     client.send(message);
   }
   $scope.editDevice = function(device){
+    $scope.deviceEdit = device;
+  }
+  $scope.edit = function(){
     var dataSend = {
       request: 'editDevice',
       data: {
-        port: device.port,
-        type: device.type,
-        name: device.name,
-        button: device.button
+        port: $scope.deviceEdit.port,
+        type: $scope.deviceEdit.type,
+        name: $scope.deviceEdit.name,
+        button: $scope.deviceEdit.button
       }
     }
     var message = new Paho.MQTT.Message(JSON.stringify(dataSend));
@@ -281,6 +290,7 @@ myApp.controller('Device', function($http,$scope,$rootScope,$location){
     message.destinationName = $scope.topic;
     client.send(message);
   }
+
   $scope.controlAuto = function(device){
     var dataSend = {
       request: 'controlAuto',
