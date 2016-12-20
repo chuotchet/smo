@@ -174,7 +174,7 @@ myApp.controller('Device', function($http,$scope,$rootScope,$location){
   //   }
   // }
   $scope.nodeData = {};
-  $scope.deviceEdit = $scope.deviceAdd = {
+  $scope.deviceEdit = $scope.deviceAdd = $scope.air = $scope.auto = {
     port: '',
     type: '',
     name: '',
@@ -204,7 +204,7 @@ myApp.controller('Device', function($http,$scope,$rootScope,$location){
       client.send(message);
     }
   });
-  $scope.control = function(device){
+  $scope.control = function(device){ //done
     var dataSend = {
       request: 'controlDevice',
       data: {
@@ -216,7 +216,7 @@ myApp.controller('Device', function($http,$scope,$rootScope,$location){
     message.destinationName = $scope.topic;
     client.send(message);
   }
-  $scope.changeMode = function(device){
+  $scope.changeMode = function(device){ //done
     var dataSend = {
       request: 'changeMode',
       data: {
@@ -228,7 +228,7 @@ myApp.controller('Device', function($http,$scope,$rootScope,$location){
     message.destinationName = $scope.topic;
     client.send(message);
   }
-  $scope.addDevice = function(){
+  $scope.addDevice = function(){ //done
     var dataSend = {
       request: 'addDevice',
       data: {
@@ -242,7 +242,7 @@ myApp.controller('Device', function($http,$scope,$rootScope,$location){
     message.destinationName = $scope.topic;
     client.send(message);
   }
-  $scope.editDevice = function(device){
+  $scope.editDevice = function(device){ //done
     $scope.deviceEdit = device;
   }
   $scope.edit = function(){
@@ -259,7 +259,7 @@ myApp.controller('Device', function($http,$scope,$rootScope,$location){
     message.destinationName = $scope.topic;
     client.send(message);
   }
-  $scope.deleteDevice = function(device){
+  $scope.deleteDevice = function(device){ //done
     var dataSend = {
       request: 'deleteDevice',
       data: {
@@ -270,7 +270,7 @@ myApp.controller('Device', function($http,$scope,$rootScope,$location){
     message.destinationName = $scope.topic;
     client.send(message);
   }
-  $scope.turnOffAll = function(){
+  $scope.turnOffAll = function(){ //done
     var dataSend = {
       request: 'turnOffAll'
     }
@@ -278,12 +278,16 @@ myApp.controller('Device', function($http,$scope,$rootScope,$location){
     message.destinationName = $scope.topic;
     client.send(message);
   }
-  $scope.controlAir = function(device){
+
+  $scope.cAir = function(device){
+    $scope.air = device;
+  }
+  $scope.controlAir = function(){
     var dataSend = {
       request: 'controlAir',
       data: {
-        port: device.port,
-        temp: device.temp
+        port: $scope.air.port,
+        temp: ($scope.air.tem).toString()
       }
     }
     var message = new Paho.MQTT.Message(JSON.stringify(dataSend));
@@ -291,14 +295,25 @@ myApp.controller('Device', function($http,$scope,$rootScope,$location){
     client.send(message);
   }
 
-  $scope.controlAuto = function(device){
+
+  $scope.cAuto = function(device){
+    $scope.auto = device;
+  }
+  $scope.controlAuto = function(){
+    $scope.auto.range = $scope.auto.min + '/' + $scope.auto.max;
+    var timeStart = $scope.auto.timeStart.getHours()+'-'+$scope.auto.timeStart.getMinutes();
+    var timeEnd = $scope.auto.timeEnd.getHours()+'-'+$scope.auto.timeEnd.getMinutes();
+    $scope.auto.time = timeStart + '/' + timeEnd;
+
     var dataSend = {
       request: 'controlAuto',
       data: {
-        port: device.port,
-        time: device.time
+        port: $scope.auto.port,
+        time: $scope.auto.time,
+        range: $scope.auto.range
       }
     }
+    console.log(dataSend);
     var message = new Paho.MQTT.Message(JSON.stringify(dataSend));
     message.destinationName = $scope.topic;
     client.send(message);

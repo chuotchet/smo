@@ -30,7 +30,7 @@
   						</center>
   					</div>
   					<div>
-  						<input type="text" ng-model="autoValue.min" class="form-control" id="min" style="text-align: center;">
+  						<input type="text" ng-model="auto.min" class="form-control" id="min" style="text-align: center;">
   					</div>
   					<div style="margin-top: 20px;">
   						<center>
@@ -38,7 +38,7 @@
   						</center>
   					</div>
   					<div>
-  						<input type="text" ng-model="autoValue.max" class="form-control" id="max" style="text-align: center;">
+  						<input type="text" ng-model="auto.max" class="form-control" id="max" style="text-align: center;">
   					</div>
   					<div style="margin-top: 20px;">
   						<center>
@@ -46,7 +46,7 @@
   						</center>
   					</div>
     				<div class="input-group bootstrap-timepicker timepicker">
-            			<input id="timeStart" type="time" ng-model="autoValue.timeStart" class="form-control input-small" style="text-align: center;">
+            			<input id="timeStart" type="time" ng-model="auto.timeStart" class="form-control input-small" style="text-align: center;">
             			<span class="input-group-addon"><i class="glyphicon glyphicon-time"></i></span>
        				</div>
        				<div style="margin-top: 20px;">
@@ -55,13 +55,13 @@
   						</center>
   					</div>
        				<div class="input-group bootstrap-timepicker timepicker">
-            			<input id="timeEnd" type="time" ng-model="autoValue.timeEnd" class="form-control input-small" style="text-align: center;">
+            			<input id="timeEnd" type="time" ng-model="auto.timeEnd" class="form-control input-small" style="text-align: center;">
             			<span class="input-group-addon"><i class="glyphicon glyphicon-time"></i></span>
        				</div>
   			</div>
   				<div class="modal-footer">
   					<center>
-  						<button class="btn btn-success" data-dismiss="modal" aria-hidden="true" style="width: 200px;">Save</button>
+  						<button class="btn btn-success" data-dismiss="modal" ng-click="controlAuto()" aria-hidden="true" style="width: 200px;">Save</button>
   					</center>
 
   				</div>
@@ -81,13 +81,13 @@
        			</div>
        			<div class="modal-body">
        				<center>
-       					<input type="number" ng-model="temValue.tem" name="points" step="1" value="10" style="text-align: center;">
+       					<input type="number" ng-model="air.tem" name="points" step="1" value="10" style="text-align: center;">
        				</center>
 
        			</div>
         		<div class="modal-footer">
           			<center>
-  						<button class="btn" data-dismiss="modal" aria-hidden="true" style="background-color: red;color: black;">Save</button>
+  						<button class="btn" data-dismiss="modal" ng-click="controlAir()" aria-hidden="true" style="background-color: red;color: black;">Save</button>
   					</center>
         		</div>
       		</div>
@@ -477,9 +477,9 @@
 				<div class="col-md-8 col-xs-12" style="float: left;">
 					<img href="#" class="img-devices-cell" type="image" ng-src="images/{{device.status}}/status.png" ng-click="control(device)" width="100" height="100" style="float: left;margin-left: 10px; margin-top: 5px;">
 					<img href="#" class="img-devices-cell" type="image" src="images/mode-{{device.mode}}.png" ng-click="changeMode(device)" width="100" height="100" style="margin-right: 100px; margin-top: 5px;">
-					<img ng-if="device.mode=='auto'" href="#changeModal" role="button" data-toggle="modal" ng-click="controlAuto(device)" class="img-devices-cell-1" type="image" src="images/setting-{{device.mode}}.png" alt="Submit" width="80" height="80" style="">
-					<img ng-if="device.type=='condition' && device.mode=='manual'" href="#editModal" role="button" data-toggle="modal" ng-click="controlAir(device)" class="img-devices-cell-1" type="image" src="images/setting-{{device.mode}}.png" alt="Submit" width="80" height="80" style="">
-					<img ng-if="device.mode=='manual'" role="button" class="img-devices-cell-1" type="image" src="images/setting-{{device.mode}}.png" alt="Submit" width="80" height="80" style="">
+					<img ng-if="device.mode=='auto'" href="#changeModal" role="button" data-toggle="modal" ng-click="cAuto(device)" class="img-devices-cell-1" type="image" src="images/setting-{{device.mode}}.png" alt="Submit" width="80" height="80" style="">
+					<img ng-if="device.type=='condition' && device.mode=='manual'" href="#editModal" role="button" data-toggle="modal" ng-click="cAir(device)" class="img-devices-cell-1" type="image" src="images/setting-{{device.mode}}.png" alt="Submit" width="80" height="80" style="">
+					<img ng-if="device.type!='condition' && device.mode=='manual'" role="button" class="img-devices-cell-1" type="image" src="images/setting-{{device.mode}}.png" alt="Submit" width="80" height="80" style="">
 					<img class="img-devices-cell-1" type="image" src="images/delete.png" ng-click="deleteDevice(device)" alt="Submit" width="80" height="80" style="float: right;margin-left: 10px; margin-top: 5px;">
 					<img href="#editDeviceModal" role="button" data-toggle="modal" ng-click="editDevice(device)" class="img-devices-cell-1" type="image" src="images/edit.png" alt="Submit" width="80" height="80" style="float: right;">
 			</center>
