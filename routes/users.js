@@ -29,6 +29,36 @@ var authenticate = function(){
   return passport.authenticate('jwt', {session: false});
 }
 
+//////////////////////////////////////////////////////////
+var crypto = require('crypto');
+function nullpad( str, len ) {
+    if( str.length >= len ) {
+        return str;
+    }
+    return str + Array( len-str.length + 1 ).join("\x00");
+}
+
+var iv = new Buffer(16);
+iv.fill(0);
+function decrypt(text,password){
+  try {
+    var decipher = crypto.createDecipheriv('aes-256-cbc', password, iv);
+    var dec = decipher.update(text,'base64','utf-8');
+    dec += decipher.final('utf8');
+    return dec;
+  } catch (e) {
+    console.log(e);
+    return '{"error":"wrong message"}';
+  }
+}
+function encrypt(text,password){
+  var cipher = crypto.createCipheriv('aes-256-cbc', password, iv);
+  var crypted = cipher.update(text,'utf8','base64')
+  crypted += cipher.final('base64');
+  return crypted;
+}
+/////////////////////////////////////////////////////////////////////////
+
 /* GET users listing. */
 router.get('/', function(req, res, next) {
   res.send('respond with a resource');
@@ -262,12 +292,12 @@ router.post('/deletenode', authenticate(), function(req, res){
   client.on('connect', function () {
     console.log('connected to mqtt');
     client.subscribe(req.body.G_MAC+'/'+req.body.N_MAC+'/s');
-    var message = {
-      request: 'deleteNode'
-    }
-    console.log(req.body.G_MAC+'/'+req.body.N_MAC);
-    console.log(message);
-    client.publish(req.body.G_MAC+'/'+req.body.N_MAC,JSON.stringify(message))
+    // var message = {
+    //   request: 'deleteNode'
+    // }
+    // console.log(req.body.G_MAC+'/'+req.body.N_MAC);
+    // console.log(message);
+    // client.publish(req.body.G_MAC+'/'+req.body.N_MAC,JSON.stringify(message))
   });
 
   client.on('message', function (topic, message) {
@@ -276,6 +306,16 @@ router.post('/deletenode', authenticate(), function(req, res){
     client.end();
   });
   models.Gateway.getGatewayByMAC(req.body.G_MAC, function(gw){
+    var key = gw.key;
+    var password = nullpad(key,32);
+    var message = {
+      request: 'deleteNode'
+    }
+    message = encrypt(JSON.stringify(message),password);
+    console.log(req.body.G_MAC+'/'+req.body.N_MAC);
+    console.log(message);
+    client.publish(req.body.G_MAC+'/'+req.body.N_MAC,message);
+
     models.Node.getNodeByMAC(req.body.N_MAC, function(node){
       gw.removeNode(node).then(function(){
         gw.getNodes().then(function(nodes){
