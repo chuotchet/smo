@@ -69,10 +69,14 @@ myApp.controller('Test',function($http,$scope,$rootScope){
   }
 });
 
-myApp.controller('ListGateway',function($http,$scope,$rootScope){
+myApp.controller('ListGateway',function($http,$scope,$rootScope,$cookies){
   $rootScope.gateways = [];
   $http.post('/users/getgateways').then(function(result){
     $rootScope.gateways = result.data.data.gateways;
+    for(i in $rootScope.gateways){
+      console.log($rootScope.gateways[i].key);
+      $cookies.put($rootScope.gateways[i].G_MAC,$rootScope.gateways[i].key);
+    }
   });
 
   $scope.editGateway = function(gw){
@@ -217,7 +221,7 @@ myApp.controller('Device', function($http,$scope,$rootScope,$location){
     message.destinationName = $scope.topic;
     client.send(message);
   }
-    
+
   }
   $scope.changeMode = function(device){ //done
     var dataSend = {
