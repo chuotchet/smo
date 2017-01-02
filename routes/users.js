@@ -257,7 +257,7 @@ router.post('/editnode', authenticate(), function(req, res){
 });
 
 router.post('/deletenode', authenticate(), function(req, res){
-  var client  = mqtt.connect('mqtt://iot.eclipse.org');
+  var client  = mqtt.connect('mqtt://test.mosquitto.org');
 
   client.on('connect', function () {
     console.log('connected to mqtt');

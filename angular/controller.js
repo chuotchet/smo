@@ -183,7 +183,7 @@ myApp.controller('Device', function($http,$scope,$rootScope,$location){
   var a = ((window.location.href).split('?')).pop();
   a = a.split('&');
   $scope.topic = a[0].split('=').pop()+'/'+a[1].split('=').pop();
-  var client = new Paho.MQTT.Client('test.mosquitto.org', Number(8080), 'smoiotlab');
+  var client = new Paho.MQTT.Client('test.mosquitto.org', Number(8080), 'smo_'+ parseInt(Math.random() * 100, 10));
   client.onMessageArrived = function(message){
     console.log('onMessageArrived');
     var data = JSON.parse(message.payloadString);
@@ -205,6 +205,7 @@ myApp.controller('Device', function($http,$scope,$rootScope,$location){
     }
   });
   $scope.control = function(device){ //done
+  if(device.mode=='manual'){
     var dataSend = {
       request: 'controlDevice',
       data: {
@@ -215,6 +216,8 @@ myApp.controller('Device', function($http,$scope,$rootScope,$location){
     var message = new Paho.MQTT.Message(JSON.stringify(dataSend));
     message.destinationName = $scope.topic;
     client.send(message);
+  }
+    
   }
   $scope.changeMode = function(device){ //done
     var dataSend = {
