@@ -468,22 +468,25 @@
 	</div>
 	<button data-toggle="modal" data-target="#addDeviceModal" type="button" class="btn btn-info">Add new device</button>
 	<div style="margin-top: 50px">
-		<div class="row div-devices-cell" ng-repeat="device in nodeData.data.devices">
-			<center>
-				<div class="col-md-4 col-xs-12" id="tem" style="float: left;">
-					<img class="img-devices" ng-src="images/{{device.status}}/{{device.type}}.png" width="100" height="100" style="float: left; margin-top: 7px;">
-					<h1 class="h1-name-cell">{{device.name}}</h1>
-				</div>
-				<div class="col-md-8 col-xs-12" style="float: left;">
-					<img href="#" class="img-devices-cell" type="image" ng-src="images/{{device.status}}/status.png" ng-click="control(device)" width="100" height="100" style="float: left;margin-left: 10px; margin-top: 5px;">
-					<img href="#" class="img-devices-cell" type="image" src="images/mode-{{device.mode}}.png" ng-click="changeMode(device)" width="100" height="100" style="margin-right: 100px; margin-top: 5px;">
-					<img ng-if="device.mode=='auto'" href="#changeModal" role="button" data-toggle="modal" ng-click="cAuto(device)" class="img-devices-cell-1" type="image" src="images/setting-{{device.mode}}.png" alt="Submit" width="80" height="80" style="">
-					<img ng-if="device.type=='condition' && device.mode=='manual'" href="#editModal" role="button" data-toggle="modal" ng-click="cAir(device)" class="img-devices-cell-1" type="image" src="images/setting-{{device.mode}}.png" alt="Submit" width="80" height="80" style="">
-					<img ng-if="device.type!='condition' && device.mode=='manual'" role="button" class="img-devices-cell-1" type="image" src="images/setting-{{device.mode}}.png" alt="Submit" width="80" height="80" style="">
-					<img class="img-devices-cell-1" type="image" src="images/delete.png" ng-click="deleteDevice(device)" alt="Submit" width="80" height="80" style="float: right;margin-left: 10px; margin-top: 5px;">
-					<img href="#editDeviceModal" role="button" data-toggle="modal" ng-click="editDevice(device)" class="img-devices-cell-1" type="image" src="images/edit.png" alt="Submit" width="80" height="80" style="float: right;">
-			</center>
+		<div ng-repeat="device in nodeData.data.devices">
+			<div class="row div-devices-cell" ng-if="device.name!=null">
+				<center>
+					<div class="col-md-4 col-xs-12" id="tem" style="float: left;">
+						<img class="img-devices" ng-src="images/{{device.status}}/{{device.type}}.png" width="100" height="100" style="float: left; margin-top: 7px;">
+						<h1 class="h1-name-cell">{{device.name}}</h1>
+					</div>
+					<div class="col-md-8 col-xs-12" style="float: left;">
+						<img href="#" class="img-devices-cell" type="image" ng-src="images/{{device.status}}/status.png" ng-click="control(device)" width="100" height="100" style="float: left;margin-left: 10px; margin-top: 5px;">
+						<img href="#" class="img-devices-cell" type="image" src="images/mode-{{device.mode}}.png" ng-click="changeMode(device)" width="100" height="100" style="margin-right: 100px; margin-top: 5px;">
+						<img ng-if="device.mode=='auto'" href="#changeModal" role="button" data-toggle="modal" ng-click="cAuto(device)" class="img-devices-cell-1" type="image" src="images/setting-{{device.mode}}.png" alt="Submit" width="80" height="80" style="">
+						<img ng-if="device.type=='condition' && device.mode=='manual'" href="#editModal" role="button" data-toggle="modal" ng-click="cAir(device)" class="img-devices-cell-1" type="image" src="images/setting-{{device.mode}}.png" alt="Submit" width="80" height="80" style="">
+						<img ng-if="device.type!='condition' && device.mode=='manual'" role="button" class="img-devices-cell-1" type="image" src="images/setting-{{device.mode}}.png" alt="Submit" width="80" height="80" style="">
+						<img class="img-devices-cell-1" type="image" src="images/delete.png" ng-click="deleteDevice(device)" alt="Submit" width="80" height="80" style="float: right;margin-left: 10px; margin-top: 5px;">
+						<img href="#editDeviceModal" role="button" data-toggle="modal" ng-click="editDevice(device)" class="img-devices-cell-1" type="image" src="images/edit.png" alt="Submit" width="80" height="80" style="float: right;">
+				</center>
+			</div>
 		</div>
+
 
 		<!-- Auto cell -->
 		<!-- test -->

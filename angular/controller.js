@@ -168,7 +168,7 @@ myApp.controller('DeleteNode',function($http,$scope,$rootScope){
   }
 });
 
-myApp.controller('Device', function($http,$scope,$rootScope,$location){
+myApp.controller('Device', function($http,$scope,$rootScope,$location,$cookies){
   // var processData = function(msg){
   //   $scope.nodeData = msg;
   //   for(i=0;i<$scope.nodeData.length;i++){
@@ -187,10 +187,35 @@ myApp.controller('Device', function($http,$scope,$rootScope,$location){
   var a = ((window.location.href).split('?')).pop();
   a = a.split('&');
   $scope.topic = a[0].split('=').pop()+'/'+a[1].split('=').pop();
+  /////////////////////////////////////////////////////////////
+  var key = $cookies.get($scope.topic.split('/')[0]);
+  function nullpad( str, len ) {
+    if( str.length >= len ) {
+        return str;
+    }
+
+    return str + Array( len-str.length + 1 ).join("\x00");
+  }
+  var password = nullpad(key,32);
+  password = CryptoJS.enc.Utf8.parse(password);
+  var iiv = CryptoJS.enc.Hex.parse('00000000000000000000000000000000');
+  function encode(text,password)
+  {
+      var encrypted = CryptoJS.AES.encrypt(text, password,{iv:iiv});
+      return encrypted.toString();
+  }
+  function decode(text,password)
+  {
+      var decrypted = CryptoJS.AES.decrypt(text, password,{iv:iiv});
+      decrypted = decrypted.toString(CryptoJS.enc.Utf8);
+      return decrypted;
+  }
+  //////////////////////////////////////////////////////////////
   var client = new Paho.MQTT.Client('test.mosquitto.org', Number(8080), 'smo_'+ parseInt(Math.random() * 100, 10));
   client.onMessageArrived = function(message){
     console.log('onMessageArrived');
-    var data = JSON.parse(message.payloadString);
+    var recvMsg = decode(message.payloadString,password);
+    var data = JSON.parse(recvMsg);
     if(data.success){
       $scope.nodeData = data;
     }
@@ -203,7 +228,8 @@ myApp.controller('Device', function($http,$scope,$rootScope,$location){
       var dataSend = {
         request: 'getData'
       }
-      var message = new Paho.MQTT.Message(JSON.stringify(dataSend));
+      var sendMsg = encode(JSON.stringify(dataSend),password);
+      var message = new Paho.MQTT.Message(sendMsg);
       message.destinationName = $scope.topic;
       client.send(message);
     }
@@ -217,7 +243,8 @@ myApp.controller('Device', function($http,$scope,$rootScope,$location){
         status: (device.status=='on')?'off':'on'
       }
     }
-    var message = new Paho.MQTT.Message(JSON.stringify(dataSend));
+    var sendMsg = encode(JSON.stringify(dataSend),password);
+    var message = new Paho.MQTT.Message(sendMsg);
     message.destinationName = $scope.topic;
     client.send(message);
   }
@@ -231,7 +258,8 @@ myApp.controller('Device', function($http,$scope,$rootScope,$location){
         mode: (device.mode=='manual')?'auto':'manual'
       }
     }
-    var message = new Paho.MQTT.Message(JSON.stringify(dataSend));
+    var sendMsg = encode(JSON.stringify(dataSend),password);
+    var message = new Paho.MQTT.Message(sendMsg);
     message.destinationName = $scope.topic;
     client.send(message);
   }
@@ -245,7 +273,8 @@ myApp.controller('Device', function($http,$scope,$rootScope,$location){
         button: $scope.deviceAdd.button
       }
     }
-    var message = new Paho.MQTT.Message(JSON.stringify(dataSend));
+    var sendMsg = encode(JSON.stringify(dataSend),password);
+    var message = new Paho.MQTT.Message(sendMsg);
     message.destinationName = $scope.topic;
     client.send(message);
   }
@@ -262,7 +291,8 @@ myApp.controller('Device', function($http,$scope,$rootScope,$location){
         button: $scope.deviceEdit.button
       }
     }
-    var message = new Paho.MQTT.Message(JSON.stringify(dataSend));
+    var sendMsg = encode(JSON.stringify(dataSend),password);
+    var message = new Paho.MQTT.Message(sendMsg);
     message.destinationName = $scope.topic;
     client.send(message);
   }
@@ -273,7 +303,8 @@ myApp.controller('Device', function($http,$scope,$rootScope,$location){
         port: device.port
       }
     }
-    var message = new Paho.MQTT.Message(JSON.stringify(dataSend));
+    var sendMsg = encode(JSON.stringify(dataSend),password);
+var message = new Paho.MQTT.Message(sendMsg);
     message.destinationName = $scope.topic;
     client.send(message);
   }
@@ -281,7 +312,8 @@ myApp.controller('Device', function($http,$scope,$rootScope,$location){
     var dataSend = {
       request: 'turnOffAll'
     }
-    var message = new Paho.MQTT.Message(JSON.stringify(dataSend));
+    var sendMsg = encode(JSON.stringify(dataSend),password);
+    var message = new Paho.MQTT.Message(sendMsg);
     message.destinationName = $scope.topic;
     client.send(message);
   }
@@ -297,7 +329,8 @@ myApp.controller('Device', function($http,$scope,$rootScope,$location){
         temp: ($scope.air.tem).toString()
       }
     }
-    var message = new Paho.MQTT.Message(JSON.stringify(dataSend));
+    var sendMsg = encode(JSON.stringify(dataSend),password);
+    var message = new Paho.MQTT.Message(sendMsg);
     message.destinationName = $scope.topic;
     client.send(message);
   }
@@ -321,7 +354,8 @@ myApp.controller('Device', function($http,$scope,$rootScope,$location){
       }
     }
     console.log(dataSend);
-    var message = new Paho.MQTT.Message(JSON.stringify(dataSend));
+    var sendMsg = encode(JSON.stringify(dataSend),password);
+    var message = new Paho.MQTT.Message(sendMsg);
     message.destinationName = $scope.topic;
     client.send(message);
   }
